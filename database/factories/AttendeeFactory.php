@@ -22,12 +22,10 @@ class AttendeeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
             'email' => $this->faker->email,
-            'adults' => $this->faker->numberBetween(0,5),
-            'lions' => $this->faker->numberBetween(0,5),
-            'kangaroos' => $this->faker->numberBetween(0,5),
-            'babies' => $this->faker->numberBetween(0,5),
+            'type' => $this->faker->randomElement(['adult', 'child_old', 'child_young', 'baby']),
         ];
     }
 }

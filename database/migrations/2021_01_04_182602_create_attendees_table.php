@@ -18,11 +18,9 @@ class CreateAttendeesTable extends Migration
             $table->timestamps();
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->string('email');
-            $table->string('name');
-            $table->integer('adults');
-            $table->integer('lions');
-            $table->integer('kangaroos');
-            $table->integer('babies');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('type');
         });
     }
 

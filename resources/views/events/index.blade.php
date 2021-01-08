@@ -32,15 +32,15 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Löwen (Kindertreff)
+                                    Kinder (2. Kl. - 6. Kl.)
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Kängurus (Kindertreff)
+                                    Kinder (3 Jahre - 1. Kl.)
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Kinderhüte
+                                    Kinderhüte (0 - 3 Jahre)
                                 </th>
                             </tr>
                             </thead>
@@ -56,16 +56,16 @@
                                         {{ $event->title }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $event->attendees()->sum('adults') }}/{{ $event->max_adults }}
+                                        {{ $event->attendees()->where('type', 'adult')->count() }}/{{ $event->max_adults }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $event->attendees()->sum('lions') }}/{{ $event->max_lions }}
+                                        {{ $event->attendees()->where('type', 'child_old')->count() }}/{{ $event->max_children_old }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $event->attendees()->sum('kangaroos') }}/{{ $event->max_kangaroos }}
+                                        {{ $event->attendees()->where('type', 'child_young')->count() }}/{{ $event->max_children_young }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $event->attendees()->sum('babies') }}/{{ $event->max_babies }}
+                                        {{ $event->attendees()->where('type', 'baby')->count() }}/{{ $event->max_babies }}
                                     </td>
                                 </tr>
                             @endforeach

@@ -22,6 +22,10 @@ Route::get('/', function () {
 Route::get('/signup/{date}', [AttendeeController::class, 'create']);
 
 Route::resource('events', EventController::class);
-Route::resource('attendees', AttendeeController::class)->only('store','destroy');
+Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
+Route::post('/events/{event}/new_attendee', [AttendeeController::class, 'store'])->name('attendees.store');
+
+
+Route::resource('attendees', AttendeeController::class)->only('destroy');
 
 require __DIR__.'/auth.php';

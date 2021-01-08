@@ -33,8 +33,8 @@ class AttendeeController extends Controller
         return view('attendees.create', [
                 'event' => $ev,
                 'remaining_adults' => $ev->remainingAdultSeats(),
-                'remaining_lions' => $ev->remainingLionSeats(),
-                'remaining_kangaroos' => $ev->remainingKangarooSeats(),
+                'remaining_children_old' => $ev->remainingChildrenOldSeats(),
+                'remaining_children_young' => $ev->remainingChildrenYoungSeats(),
                 'remaining_babies' => $ev->remainingBabySeats()
             ]
         );
@@ -44,43 +44,72 @@ class AttendeeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
+     * @param Event $event
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Event $event)
     {
-        $ev = Event::where('id', $request['event_id'])->first();
-        if ($ev == null) {
-            abort(404);
-        }
 
         $validated = $request->validate(
             [
-                'name' => 'required|max:255',
-                'email' => 'required|max:255|email',
-                'adults' => 'integer|min:0|max:' . strval($ev->remainingAdultSeats()),
-                'lions' => 'integer|min:0|max:' . strval($ev->remainingLionSeats()),
-                'kangaroos' => 'integer|min:0|max:' . strval($ev->remainingKangarooSeats()),
-                'babies' => 'integer|min:0|max:' . strval($ev->remainingBabySeats()),
+                '*.first_name' => 'required|max:255',
+                '*.last_name' => 'required|max:255',
+                '*.email' => 'required|max:255|email',
+                '*.type' => 'required|in:adult,child_old,child_young,baby',
             ]);
 
-        if (($validated['adults'] ?? 0) == 0 &&
-            ($validated['lions'] ?? 0) == 0 &&
-            ($validated['kangaroos'] ?? 0) == 0 &&
-            ($validated['babies'] ?? 0) == 0) {
-            abort(403); // TODO: error message
+        if (sizeof($validated) == 0) {
+            abort(406);
         }
 
-        $att = new Attendee;
-        $att->event_id = $ev->id;
-        $att->name = $validated['name'];
-        $att->email = $validated['email'];
-        $att->adults = $validated['adults'] ?? 0;
-        $att->lions = $validated['lions'] ?? 0;
-        $att->kangaroos = $validated['kangaroos'] ?? 0;
-        $att->babies = $validated['babies'] ?? 0;
-        $att->save();
+        $adults = 0;
+        $children_old = 0;
+        $children_young = 0;
+        $babies = 0;
 
-        return view('attendees.create', ['success' => true, 'event' => $ev]);
+        foreach ($validated as $att) {
+            switch ($att['type']) {
+                case 'adult':
+                    $adults++;
+                    break;
+                case 'child_old':
+                    $children_old++;
+                    break;
+                case 'child_young':
+                    $children_young++;
+                    break;
+                case 'baby':
+                    $babies++;
+                    break;
+            }
+        }
+
+        if ($adults > $event->remainingAdultSeats()) {
+           abort(400);
+        }
+        if ($children_old > $event->remainingChildrenOldSeats()) {
+            abort(400);
+        }
+        if ($children_young > $event->remainingChildrenYoungSeats()) {
+            abort(400);
+        }
+        if ($babies > $event->remainingBabySeats()) {
+            abort(400);
+        }
+
+
+        foreach ($validated as $att) {
+            $attendee = new Attendee;
+            $attendee->event_id = $event->id;
+            $attendee->first_name = $att['first_name'];
+            $attendee->last_name = $att['last_name'];
+            $attendee->email = $att['email'];
+            $attendee->type = $att['type'];
+            $attendee->save();
+        }
+
+
+        return view('attendees.create', ['success' => true, 'event' => $event]);
     }
 
 

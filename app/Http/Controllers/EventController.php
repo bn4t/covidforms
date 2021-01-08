@@ -10,7 +10,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('remainingSeats');
     }
 
     /**
@@ -43,11 +43,11 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'date' => 'required|unique:events|after_or_equal:today|date',
+            'date' => 'required|after_or_equal:today|date',
             'description' => 'required|max:2048',
             'max_adults' => 'required|integer|min:0',
-            'max_lions' => 'required|integer|min:0',
-            'max_kangaroos' => 'required|integer|min:0',
+            'max_children_old' => 'required|integer|min:0',
+            'max_children_young' => 'required|integer|min:0',
             'max_babies' => 'required|integer|min:0',
         ]);
 
@@ -56,8 +56,8 @@ class EventController extends Controller
         $event->date = $validated['date'];
         $event->description = $validated['description'];
         $event->max_adults = $validated['max_adults'];
-        $event->max_lions = $validated['max_lions'];
-        $event->max_kangaroos = $validated['max_kangaroos'];
+        $event->max_children_old = $validated['max_children_old'];
+        $event->max_children_young = $validated['max_children_young'];
         $event->max_babies = $validated['max_babies'];
         $event->save();
 
@@ -72,19 +72,24 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $remAdults = $event->max_adults - $event->attendees()->sum('adults');
-        $remLions = $event->max_lions - $event->attendees()->sum('lions');
-        $remKangaroos = $event->max_kangaroos - $event->attendees()->sum('kangaroos');
-        $remBabies = $event->max_babies - $event->attendees()->sum('babies');
-
         return view('events.show', [
                 'event' => $event,
-                'remaining_adults' => $remAdults,
-                'remaining_lions' => $remLions,
-                'remaining_kangaroos' => $remKangaroos,
-                'remaining_babies' => $remBabies
+                'remaining_adults' => $event->remainingAdultSeats(),
+                'remaining_children_old' => $event->remainingChildrenOldSeats(),
+                'remaining_children_young' => $event->remainingChildrenYoungSeats(),
+                'remaining_babies' => $event->remainingBabySeats()
             ]
         );
+    }
+
+    public function remainingSeats(Event $event)
+    {
+        return response()->json([
+            'remaining_adults' => $event->remainingAdultSeats(),
+            'remaining_children_old' => $event->remainingChildrenOldSeats(),
+            'remaining_children_young' => $event->remainingChildrenYoungSeats(),
+            'remaining_babies' => $event->remainingBabySeats()
+        ]);
     }
 
     /**
@@ -112,8 +117,8 @@ class EventController extends Controller
             'date' => 'required|after_or_equal:today|date',
             'description' => 'required|max:2048',
             'max_adults' => 'required|integer|min:0',
-            'max_lions' => 'required|integer|min:0',
-            'max_kangaroos' => 'required|integer|min:0',
+            'max_children_old' => 'required|integer|min:0',
+            'max_children_young' => 'required|integer|min:0',
             'max_babies' => 'required|integer|min:0',
         ]);
 
@@ -123,8 +128,8 @@ class EventController extends Controller
         $event->date = $validated['date'];
         $event->description = $validated['description'];
         $event->max_adults = $validated['max_adults'];
-        $event->max_lions = $validated['max_lions'];
-        $event->max_kangaroos = $validated['max_kangaroos'];
+        $event->max_children_old = $validated['max_children_old'];
+        $event->max_children_young = $validated['max_children_young'];
         $event->max_babies = $validated['max_babies'];
         $event->update();
 

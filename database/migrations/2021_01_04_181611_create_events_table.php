@@ -20,8 +20,8 @@ class CreateEventsTable extends Migration
             $table->date('date')->unique();
             $table->text('description');
             $table->integer('max_adults');
-            $table->integer('max_lions');
-            $table->integer('max_kangaroos');
+            $table->integer('max_children_old');
+            $table->integer('max_children_young');
             $table->integer('max_babies');
         });
     }

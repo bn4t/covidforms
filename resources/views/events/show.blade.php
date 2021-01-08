@@ -34,19 +34,19 @@
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <p class="ml-2">Max. {{ $event->max_adults }} Erwachsene</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'adult')->count() }}/{{ $event->max_adults }} Erwachsene</p>
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <p class="ml-2">Max. {{ $event->max_lions }} Löwen (Kindertreff)</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_old')->count() }}/{{ $event->max_children_old }} Kinder (2. Kl. - 6. Kl.)</p>
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <p class="ml-2">Max. {{ $event->max_kangaroos }} Kängurus (Kindertreff)</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_young')->count() }}/{{ $event->max_children_young }} Kinder (3 Jahre - 1. Kl.)</p>
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <p class="ml-2">Max. {{ $event->babies }} Kinderhüeti</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'baby')->count() }}/{{ $event->max_babies }} Kinderhüeti</p>
                 </div>
             </div>
 
@@ -75,7 +75,11 @@
                                 <tr>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Name
+                                        Vorname
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Nachname
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -83,19 +87,7 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Erwachsene
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Löwen (Kindertreff)
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Kängurus (Kindertreff)
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Kinderhüte
+                                        Typ
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -107,22 +99,29 @@
                                 @foreach($event->attendees()->get() as $att)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $att->name }}
+                                            {{ $att->first_name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $att->last_name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $att->email }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $att->adults }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $att->lions }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $att->kangaroos }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $att->babies }}
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @switch($att->type)
+                                                @case('adult')
+                                                    Erwachsen
+                                                    @break
+                                                @case('child_old')
+                                                    Kind (2. Kl. - 6. Kl.)
+                                                    @break
+                                                @case('child_young')
+                                                    Kind (3 Jahre - 1. Kl.)
+                                                    @break
+                                                @case('baby')
+                                                    Kinderhüte
+                                                    @break
+                                            @endswitch
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <form method="post" action="{{ route('attendees.destroy', $att) }}" onsubmit="return confirm('Anmeldung löschen?');">

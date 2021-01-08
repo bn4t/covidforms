@@ -27,8 +27,8 @@ class EventFactory extends Factory
             'date' => $this->faker->unique()->date('Y-m-d','+90 days'),
             'description' => $this->faker->text(500),
             'max_adults' => $this->faker->numberBetween(0,20),
-            'max_lions' => $this->faker->numberBetween(0,20),
-            'max_kangaroos' => $this->faker->numberBetween(0,20),
+            'max_children_old' => $this->faker->numberBetween(0,20),
+            'max_children_young' => $this->faker->numberBetween(0,20),
             'max_babies' => $this->faker->numberBetween(0,20),
         ];
     }
