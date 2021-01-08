@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SignupSuccessful;
 use App\Models\Attendee;
 use App\Models\AttendeeSeat;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use function Psy\debug;
 
 class AttendeeController extends Controller
@@ -45,7 +47,7 @@ class AttendeeController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param Event $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function store(Request $request, Event $event)
     {
@@ -108,6 +110,7 @@ class AttendeeController extends Controller
             $attendee->save();
         }
 
+        Mail::to($validated[0]['email'])->send(new SignupSuccessful($validated, $event));
 
         return view('attendees.create', ['success' => true, 'event' => $event]);
     }

@@ -19,6 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/mailable', function () {
+    $att = App\Models\Attendee::paginate(5)->items();
+    $ev = \App\Models\Event::find(1);
+
+    return new App\Mail\SignupSuccessful($att, $ev);
+});
+
 Route::get('/signup/{date}', [AttendeeController::class, 'create']);
 
 Route::resource('events', EventController::class);
