@@ -19,10 +19,6 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        if (!env('ENABLED_REGISTRATION', false)) {
-            abort(404);
-        }
-
         return view('auth.register');
     }
 
@@ -36,14 +32,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!env('ENABLED_REGISTRATION', false)) {
-            abort(404);
-        }
 
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'code' => 'required|string|in:'.env('REGISTRATION_CODE', 'foo')
         ]);
 
         Auth::login($user = User::create([
