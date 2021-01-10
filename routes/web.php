@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/signup/{date}', [AttendeeController::class, 'create']);
+Route::get('/signup/{date}', [AttendeeController::class, 'create'])->name('attendees.create');
 
 Route::resource('events', EventController::class);
 Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
