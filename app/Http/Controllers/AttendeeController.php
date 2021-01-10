@@ -166,7 +166,7 @@ class AttendeeController extends Controller
             array_push($newAttendees, $attendee);
         }
 
-        Mail::to($validated[0]['email'])->send(new SignupSuccessful($newAttendees, $event));
+        Mail::to($validated[0]['email'])->queue(new SignupSuccessful($newAttendees, $event));
 
         return view('attendees.create', ['success' => true, 'event' => $event]);
     }
