@@ -154,6 +154,7 @@ class AttendeeController extends Controller
         }
 
 
+        $newAttendees = [];
         foreach ($validated as $att) {
             $attendee = new Attendee;
             $attendee->event_id = $event->id;
@@ -162,9 +163,10 @@ class AttendeeController extends Controller
             $attendee->email = $att['email'];
             $attendee->type = $att['type'];
             $attendee->save();
+            array_push($newAttendees, $attendee);
         }
 
-        Mail::to($validated[0]['email'])->send(new SignupSuccessful($validated, $event));
+        Mail::to($validated[0]['email'])->send(new SignupSuccessful($newAttendees, $event));
 
         return view('attendees.create', ['success' => true, 'event' => $event]);
     }
