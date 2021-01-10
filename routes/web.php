@@ -31,6 +31,7 @@ Route::get('/signup/{date}', [AttendeeController::class, 'create']);
 Route::resource('events', EventController::class);
 Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
 Route::post('/events/{event}/new_attendee', [AttendeeController::class, 'store'])->name('attendees.store');
+Route::get('/events/{event}/download_attendees', [AttendeeController::class, 'downloadCsv'])->name('attendees.download_csv');
 
 
 Route::resource('attendees', AttendeeController::class)->only('destroy');

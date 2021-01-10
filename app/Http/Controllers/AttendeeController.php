@@ -16,6 +16,11 @@ class AttendeeController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except('create', 'store');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +46,55 @@ class AttendeeController extends Controller
             ]
         );
     }
+
+
+    public function downloadCsv(Event $event)
+    {
+        $headers = [
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0'
+            , 'Content-type' => 'text/csv'
+            , 'Content-Disposition' => 'attachment; filename=Teilnehmer-'.str_replace(' ', '-',$event->title).'-'.Carbon::parse($event->date)->format('Y-m-d').'.csv'
+            , 'Expires' => '0'
+            , 'Pragma' => 'public'
+        ];
+
+        $list = $event->attendees()->get(['created_at', 'first_name', 'last_name', 'email', 'type'])->toArray();
+
+        # add headers for each column in the CSV download
+        array_unshift($list, ['Datum Anmeldung', 'Vorname', 'Nachname', 'Email', 'Typ']);
+
+        $callback = function () use ($list) {
+            $FH = fopen('php://output', 'w');
+            $i = 0;
+            foreach ($list as $row) {
+                if ($i > 0) {
+                    $row['created_at'] = Carbon::parse($row['created_at'])->format('Y.m.d h:m:s');
+
+                    switch ($row['type']) {
+                        case 'adult':
+                            $row['type'] = 'Erwachsen';
+                            break;
+                        case 'child_old':
+                            $row['type'] = 'Kind (2. Kl. - 6. Kl.)';
+                            break;
+                        case 'child_young':
+                            $row['type'] = 'Kind (3 Jahre - 1. Kl.)';
+                            break;
+                        case 'baby':
+                            $row['type'] = 'Kleinkind (0 - 3 Jahre)';
+                            break;
+                    }
+                }
+
+                fputcsv($FH, $row);
+                $i++;
+            }
+            fclose($FH);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -87,7 +141,7 @@ class AttendeeController extends Controller
         }
 
         if ($adults > $event->remainingAdultSeats()) {
-           abort(400);
+            abort(400);
         }
         if ($children_old > $event->remainingChildrenOldSeats()) {
             abort(400);
