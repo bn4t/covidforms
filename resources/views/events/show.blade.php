@@ -5,6 +5,7 @@
                 {{ __('Event') }}
             </h2>
             <div class="flex items-center">
+                <a href="{{ route('attendees.create', \Carbon\Carbon::parse($event->date)->format('d.m.Y')) }}" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-xl mr-2">Aufrufen</a>
                 <a href="{{ route('events.edit', $event) }}" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-xl mr-2">Bearbeiten</a>
                 <form method="post" action="{{ route('events.destroy', $event) }}" onsubmit="return confirm('Event löschen?');">
                     @method('delete')
@@ -20,7 +21,7 @@
     <div class="mt-10 max-w-6xl mx-auto">
         <div class="flex flex-wrap justify-between items-baseline">
             <div class="max-w-xl">
-                <h1 class="text-2xl mb-1">{{ $event->title }} <span class="text-lg">(<a href="{{ route('attendees.create', \Carbon\Carbon::parse($event->date)->format('Y.m.d') }}" class="hover:underline text-blue-500">link</a>)</span> </h1>
+                <h1 class="text-2xl mb-1">{{ $event->title }}</h1>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
