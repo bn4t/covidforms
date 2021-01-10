@@ -31,7 +31,7 @@
                    id="error-display" hidden></p>
 
                 @if($event->remainingAdultSeats() == 0 && $event->remainingChildrenOldSeats() == 0 && $event->remainingChildrenYoungSeats() == 0 &&
-$event->reminaingBabySeats() == 0)
+$event->remainingBabySeats() == 0)
                     <div
                         class="mt-10 bg-blue-500 shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold">
                         <p>Leider sind für diesen Event schon alle Plätze besetzt.</p>
