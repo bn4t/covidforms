@@ -112,7 +112,7 @@ $event->remainingBabySeats() == 0)
                             </div>
 
                             <div class="flex items-center justify-center max-w-lg mx-auto flex-wrap">
-                                <button x-on:click="addForm()"
+                                <button x-on:click="addForm()" type="button"
                                         class="rounded-xl py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ $event->remainingBabySeats() == 0)
                                     </svg>
                                     <span class="ml-1">Hinzufügen</span>
                                 </button>
-                                <button x-on:click="remForm()"
+                                <button x-on:click="remForm()" type="button"
                                         class="rounded-xl py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
