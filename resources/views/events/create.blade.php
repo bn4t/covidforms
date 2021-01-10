@@ -23,7 +23,6 @@
 
         <form method="post" action="{{ route('events.store') }}">
             @csrf
-            @method('put')
             <div class="flex items-center mb-10">
                 <label for="title" class="text-xl flex-1">Titel</label>
                 <input type="text" id="title" name="title" class="flex-grow rounded-xl py-1 px-3" required>
