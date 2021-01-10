@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        if (!config('ENABLED_REGISTRATION')) {
+        if (!env('ENABLED_REGISTRATION', false)) {
             abort(404);
         }
 
@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!config('ENABLED_REGISTRATION')) {
+        if (!env('ENABLED_REGISTRATION', false)) {
             abort(404);
         }
 
