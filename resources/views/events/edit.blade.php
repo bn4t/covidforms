@@ -26,33 +26,33 @@
             @method('patch')
             <div class="flex items-center mb-10">
                 <label for="title" class="text-xl flex-1">Titel</label>
-                <input type="text" id="title" name="title" class="flex-grow rounded-xl py-1 px-3" value="{{ $event->title }}" required>
+                <input type="text" id="title" name="title" class="flex-grow rounded-lg py-1 px-3" value="{{ $event->title }}" required>
             </div>
             <div class="flex items-center mb-10">
                 <label for="date" class="text-xl flex-1">Datum</label>
-                <input style="width: 15rem;" type="date" id="date" name="date" class="flex-grow rounded-xl py-1 px-3" value="{{ \Carbon\Carbon::parse($event->date)->format('Y-m-d') }}" required>
+                <input style="width: 15rem;" type="date" id="date" name="date" class="flex-grow rounded-lg py-1 px-3" value="{{ \Carbon\Carbon::parse($event->date)->format('Y-m-d') }}" required>
             </div>
             <div class="flex items-baseline mb-10">
                 <label for="description" class="text-xl flex-1">Beschreibung</label>
-                <textarea id="description" name="description" cols="18" rows="6" class="flex-grow rounded-xl py-1 px-3" required>{{ $event->description }}</textarea>
+                <textarea id="description" name="description" cols="18" rows="6" class="flex-grow rounded-lg py-1 px-3" required>{{ $event->description }}</textarea>
             </div>
             <div class="flex items-center mb-10">
                 <label for="max_adults" class="text-xl flex-1">Max. Erwachsene</label>
-                <input type="number" min="0" id="max_adults" name="max_adults" class="flex-grow rounded-xl py-1 px-3" value="{{ $event->max_adults }}" required>
+                <input type="number" min="0" id="max_adults" name="max_adults" class="flex-grow rounded-lg py-1 px-3" value="{{ $event->max_adults }}" required>
             </div>
             <div class="flex items-center mb-10">
                 <label for="max_children_old" class="text-xl flex-1">Max. Kinder (2. Kl. - 6. Kl.)</label>
-                <input type="number" min="0" id="max_children_old" name="max_children_old" class="flex-grow rounded-xl py-1 px-3" value="{{ $event->max_children_old }}" required>
+                <input type="number" min="0" id="max_children_old" name="max_children_old" class="flex-grow rounded-lg py-1 px-3" value="{{ $event->max_children_old }}" required>
             </div>
             <div class="flex items-center mb-10">
                 <label for="max_children_young" class="text-xl flex-1">Max. Kinder (3 Jahre - 1. Kl.)</label>
-                <input type="number" min="0" id="max_children_young" name="max_children_young" class="flex-grow rounded-xl py-1 px-3" value="{{ $event->max_children_young }}" required>
+                <input type="number" min="0" id="max_children_young" name="max_children_young" class="flex-grow rounded-lg py-1 px-3" value="{{ $event->max_children_young }}" required>
             </div>
             <div class="flex items-center mb-10">
                 <label for="max_babies" class="text-xl flex-1">Max. Kinderhüti</label>
-                <input type="number" min="0" id="max_babies" name="max_babies" class="flex-grow rounded-xl py-1 px-3" value="{{ $event->max_babies }}" required>
+                <input type="number" min="0" id="max_babies" name="max_babies" class="flex-grow rounded-lg py-1 px-3" value="{{ $event->max_babies }}" required>
             </div>
-            <button class="mx-auto block bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-xl text-xl mt-12">Speichern</button>
+            <button class="mx-auto block bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg text-xl mt-12">Speichern</button>
         </form>
 
     </div>

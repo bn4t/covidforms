@@ -38,7 +38,7 @@ $event->remainingBabySeats() == 0)
                     </div>
                 @else
 
-                    <div class="w-72 mx-auto py-2 px-4 bg-blue-500 rounded-xl shadow text-white mb-5">
+                    <div class="w-72 mx-auto py-2 px-4 bg-blue-500 rounded-lg shadow text-white mb-5">
                         <p class="text-center text-lg">Verbleibende Plätze</p>
                         <div class="flex justify-between items-center">
                             <p>Erwachsene: </p>
@@ -67,7 +67,7 @@ $event->remainingBabySeats() == 0)
                             <div class="w-60 mx-auto mt-8 mb-3">
                                 <label for="email" class="block ml-1 mb-1">Email Adresse</label>
                                 <input id="email" name="email" type="email"
-                                       class="py-1 px-3 rounded-xl bg-white w-full border border-blue-500 text-gray-800"
+                                       class="py-1 px-3 rounded-lg bg-white w-full border border-blue-500 text-gray-800"
                                        required>
                             </div>
 
@@ -75,14 +75,14 @@ $event->remainingBabySeats() == 0)
                             <div class="flex flex-wrap items-center justify-center max-w-3xl mx-auto ">
                                 <template x-for="i in forms">
                                     <div x-data="attendee()"
-                                         class="bg-blue-500 shadow text-white rounded-xl py-4 px-5 max-w-xs my-5 mx-4">
+                                         class="bg-blue-500 shadow text-white rounded-lg py-4 px-5 max-w-xs my-5 mx-4">
                                         <p class="text-2xl text-center mb-4">Teilnehmer</p>
 
                                         <div class="my-2">
                                             <label for="first_name" class="block ml-1 mb-1">Vorname</label>
                                             <input id="first_name" name="first_name" x-spread="auto_save"
                                                    x-model="att.first_name"
-                                                   class="py-1 px-3 rounded-xl bg-white w-full border border-gray-200 text-gray-800"
+                                                   class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"
                                                    required>
                                         </div>
 
@@ -90,14 +90,14 @@ $event->remainingBabySeats() == 0)
                                             <label for="last_name" class="block ml-1 mb-1">Nachname</label>
                                             <input id="last_name" name="last_name" x-spread="auto_save"
                                                    x-model="att.last_name"
-                                                   class="py-1 px-3 rounded-xl bg-white w-full border border-gray-200 text-gray-800"
+                                                   class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"
                                                    required>
                                         </div>
 
                                         <div class="my-2">
                                             <label for="type" class="block ml-1 mb-1">Typ</label>
                                             <select name="type" id="type"
-                                                    class="rounded-xl w-full border border-gray-200 text-gray-800"
+                                                    class="rounded-lg w-full border border-gray-200 text-gray-800"
                                                     x-spread="auto_save" x-model="att.att_type" required>
                                                 <option value="adult">Erwachsener</option>
                                                 <option value="child_old">Kind (2. Kl. - 6. Kl.)</option>
@@ -113,7 +113,7 @@ $event->remainingBabySeats() == 0)
 
                             <div class="flex items-center justify-center max-w-lg mx-auto flex-wrap">
                                 <button x-on:click="addForm()" type="button"
-                                        class="rounded-xl py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
+                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -126,7 +126,7 @@ $event->remainingBabySeats() == 0)
                                     <span class="ml-1">Hinzufügen</span>
                                 </button>
                                 <button x-on:click="remForm()" type="button"
-                                        class="rounded-xl py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
+                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -140,7 +140,7 @@ $event->remainingBabySeats() == 0)
                             </div>
 
                             <button type="submit"
-                                    class="py-1 text-lg px-6 bg-gradient-to-r from-indigo-400 to-blue-500 hover:bg-blue-500 text-white text-center font-semibold rounded-xl block mx-auto mt-8">
+                                    class="py-1 text-lg px-6 bg-gradient-to-r from-indigo-400 to-blue-500 hover:bg-blue-500 text-white text-center font-semibold rounded-lg block mx-auto mt-8">
                                 Anmelden
                             </button>
                         </div>

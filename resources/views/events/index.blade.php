@@ -5,7 +5,7 @@
                 {{ __('Dashboard') }}
             </h2>
             <div class="flex items-center">
-                <a href="{{ route('events.create') }}" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-xl mr-2">Neuer Event</a>
+                <a href="{{ route('events.create') }}" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2">Neuer Event</a>
             </div>
         </div>
     </x-slot>
