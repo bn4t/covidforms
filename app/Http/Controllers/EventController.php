@@ -61,8 +61,6 @@ class EventController extends Controller
         $event->max_babies = $validated['max_babies'];
         $event->save();
 
-        // TODO: send mail
-
         return redirect(route('events.index'));
     }
 
