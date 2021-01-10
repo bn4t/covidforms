@@ -58,10 +58,10 @@ class AttendeeController extends Controller
             , 'Pragma' => 'public'
         ];
 
-        $list = $event->attendees()->get(['created_at', 'first_name', 'last_name', 'email', 'type'])->toArray();
+        $list = $event->attendees()->get(['created_at', 'last_name', 'first_name', 'email', 'type'])->toArray();
 
         # add headers for each column in the CSV download
-        array_unshift($list, ['Datum Anmeldung', 'Vorname', 'Nachname', 'Email', 'Typ']);
+        array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ']);
 
         $callback = function () use ($list) {
             $FH = fopen('php://output', 'w');
@@ -86,7 +86,7 @@ class AttendeeController extends Controller
                     }
                 }
 
-                fputcsv($FH, $row);
+                fputcsv($FH, $row, ';');
                 $i++;
             }
             fclose($FH);

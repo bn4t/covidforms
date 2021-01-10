@@ -84,11 +84,11 @@
                                 <tr>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Vorname
+                                        Nachname
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nachname
+                                        Vorname
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -108,10 +108,10 @@
                                 @foreach($event->attendees()->get() as $att)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $att->first_name }}
+                                            {{ $att->last_name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $att->last_name }}
+                                            {{ $att->first_name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $att->email }}
