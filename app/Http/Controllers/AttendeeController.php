@@ -72,7 +72,7 @@ class AttendeeController extends Controller
 
                     switch ($row['type']) {
                         case 'adult':
-                            $row['type'] = 'Erwachsen';
+                            $row['type'] = 'Erwachsener';
                             break;
                         case 'child_old':
                             $row['type'] = 'Kind (2. Kl. - 6. Kl.)';

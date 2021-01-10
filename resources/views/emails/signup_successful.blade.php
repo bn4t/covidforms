@@ -18,7 +18,7 @@ Datum: {{ \Carbon\Carbon::parse($event->date)->format('d.m.Y') }}
 @foreach($attendees as $att)
 @switch($att->type)
 @case('adult')
-| {{ $att->first_name }} | {{ $att->last_name }} | Erwachsen |
+| {{ $att->first_name }} | {{ $att->last_name }} | Erwachsener |
 @break
 @case('child_old')
 | {{ $att->first_name }} | {{ $att->last_name }} | Kind (2. Kl. - 6. Kl.) |

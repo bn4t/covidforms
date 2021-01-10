@@ -119,7 +119,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @switch($att->type)
                                                 @case('adult')
-                                                    Erwachsen
+                                                    Erwachsener
                                                     @break
                                                 @case('child_old')
                                                     Kind (2. Kl. - 6. Kl.)
