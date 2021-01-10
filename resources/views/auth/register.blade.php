@@ -47,10 +47,10 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="code" :value="Registration Code"/>
+                <x-label for="code" :value="__('Registration Code')"/>
 
                 <x-input id="code" class="block mt-1 w-full"
-                         type="string"
+                         type="text"
                          name="code" required/>
             </div>
 
