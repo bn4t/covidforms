@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AttendeeController;
 use App\Http\Controllers\EventController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['throttle:global'])->group(function () {
+    Route::get('/ip', function (Request $request) {
+        dd($request->ip());
+    });
     Route::get('/signup/{date}', [AttendeeController::class, 'create'])->name('attendees.create');
 
     Route::resource('events', EventController::class);
