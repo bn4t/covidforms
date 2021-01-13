@@ -100,6 +100,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Bemerkung
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Manage
                                     </th>
                                 </tr>
@@ -107,16 +111,16 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($event->attendees()->get() as $att)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap max-w-xs">
                                             {{ $att->last_name }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap max-w-xs">
                                             {{ $att->first_name }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap max-w-xs">
                                             {{ $att->email }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap max-w-xs">
                                             @switch($att->type)
                                                 @case('adult')
                                                     Erwachsener
@@ -131,6 +135,9 @@
                                                     Kleinkind (0 - 3 Jahre)
                                                     @break
                                             @endswitch
+                                        </td>
+                                        <td class="px-6 py-4 break-words max-w-xs">
+                                            {{ $att->comment }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <form method="post" action="{{ route('attendees.destroy', $att) }}" onsubmit="return confirm('Anmeldung löschen?');">

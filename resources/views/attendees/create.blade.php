@@ -95,6 +95,13 @@ $event->remainingBabySeats() == 0)
                                         </div>
 
                                         <div class="my-2">
+                                            <label for="last_name" class="block ml-1 mb-1">Bemerkung (Optional)</label>
+                                            <textarea id="last_name" name="last_name" x-spread="auto_save" cols="28" rows="1" maxlength="1024"
+                                                   x-model="att.comment"
+                                                      class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"></textarea>
+                                        </div>
+
+                                        <div class="my-2">
                                             <label for="type" class="block ml-1 mb-1">Typ</label>
                                             <select name="type" id="type"
                                                     class="rounded-lg w-full border border-gray-200 text-gray-800"
@@ -105,7 +112,6 @@ $event->remainingBabySeats() == 0)
                                                 <option value="baby">Kleinkind (0 - 3 Jahre)</option>
                                             </select>
                                         </div>
-
 
                                     </div>
                                 </template>
@@ -190,6 +196,7 @@ $event->remainingBabySeats() == 0)
                                     first_name: "",
                                     last_name: "",
                                     att_type: "adult",
+                                    comment: ""
                                 },
                                 auto_save: {
                                     ['@click.away']() {
@@ -202,6 +209,7 @@ $event->remainingBabySeats() == 0)
                                         first_name: this.att.first_name,
                                         last_name: this.att.last_name,
                                         type: this.att.att_type,
+                                        comment: this.att.comment
                                     }
                                 }
                             }

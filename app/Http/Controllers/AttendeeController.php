@@ -57,10 +57,10 @@ class AttendeeController extends Controller
             , 'Pragma' => 'public'
         ];
 
-        $list = $event->attendees()->get(['created_at', 'last_name', 'first_name', 'email', 'type'])->toArray();
+        $list = $event->attendees()->get(['created_at', 'last_name', 'first_name', 'email', 'type', 'comment'])->toArray();
 
         # add headers for each column in the CSV download
-        array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ']);
+        array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ', 'Bemerkung']);
 
         $callback = function () use ($list) {
             $FH = fopen('php://output', 'w');
@@ -111,6 +111,7 @@ class AttendeeController extends Controller
                 '*.last_name' => 'required|max:255',
                 '*.email' => 'required|max:255|email',
                 '*.type' => 'required|in:adult,child_old,child_young,baby',
+                '*.comment' => 'max:1024'
             ]);
 
         if (sizeof($validated) == 0) {
@@ -161,6 +162,7 @@ class AttendeeController extends Controller
             $attendee->last_name = $att['last_name'];
             $attendee->email = $att['email'];
             $attendee->type = $att['type'];
+            $attendee->comment = $att['comment'];
             $attendee->save();
             array_push($newAttendees, $attendee);
         }
