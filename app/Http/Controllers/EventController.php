@@ -68,12 +68,23 @@ class EventController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Event $event
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Event $event, Request $request)
     {
+        $att = null;
+
+        if ($request->input('filter_type') != "") {
+            $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get();
+        } else {
+            $att = $event->attendees()->get();
+        }
+
         return view('events.show', [
                 'event' => $event,
+                'attendees' => $att,
+                'filter' => $request->input('filter_type') == "" ? 'none': $request->input('filter_type'),
                 'remaining_adults' => $event->remainingAdultSeats(),
                 'remaining_children_old' => $event->remainingChildrenOldSeats(),
                 'remaining_children_young' => $event->remainingChildrenYoungSeats(),

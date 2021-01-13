@@ -47,7 +47,7 @@ class AttendeeController extends Controller
     }
 
 
-    public function downloadCsv(Event $event)
+    public function downloadCsv(Event $event, Request $request)
     {
         $headers = [
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0'
@@ -57,7 +57,14 @@ class AttendeeController extends Controller
             , 'Pragma' => 'public'
         ];
 
-        $list = $event->attendees()->get(['created_at', 'last_name', 'first_name', 'email', 'type', 'comment'])->toArray();
+        $att = null;
+        if ($request->input('filter_type') != "") {
+            $att = $event->attendees()->where('type', '=',$request->input('filter_type'));
+        } else {
+            $att = $event->attendees();
+        }
+
+        $list = $att->get(['created_at', 'last_name', 'first_name', 'email', 'type', 'comment'])->toArray();
 
         # add headers for each column in the CSV download
         array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ', 'Bemerkung']);
