@@ -20,7 +20,7 @@
             </div>
 
             <div id="hide-on-success">
-                <div class="mb-16 mt-10 text-center">
+                <div class="mb-16 mt-10 text-center markdown">
                     {!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $event->description) !!}
                 </div>
 

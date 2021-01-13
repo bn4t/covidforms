@@ -144,7 +144,7 @@ class EventController extends Controller
         $event->max_babies = $validated['max_babies'];
         $event->update();
 
-        return redirect(route('events.index'));
+        return redirect(route('events.show', $event));
     }
 
     /**

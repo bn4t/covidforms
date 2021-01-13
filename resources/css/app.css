@@ -1,3 +1,39 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.markdown h1 {
+    @apply text-4xl;
+}
+
+.markdown ul {
+    @apply list-disc list-inside
+}
+.markdown ul > li > ul > li {
+    @apply ml-8
+}
+
+.markdown ul > li > ul > li > ul > li {
+    @apply ml-10
+}
+
+.markdown h2 {
+    @apply text-3xl;
+}
+
+.markdown h3 {
+    @apply text-2xl;
+}
+
+.markdown h4 {
+    @apply text-xl;
+}
+
+.markdown a {
+    @apply text-blue-500 hover:underline;
+}
+
+.markdown img {
+    @apply mx-auto rounded-lg shadow my-5
+}

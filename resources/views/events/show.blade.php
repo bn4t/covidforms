@@ -78,9 +78,11 @@
                 </div>
             </div>
 
-            <div class="max-w-2xl mt-10 md:mt-0">
+            <div class="max-w-2xl mt-10 md:mt-0 w-full">
                 <h2 class="text-2xl mb-1">Beschreibung</h2>
-                <p>{{ $event->description }}</p>
+                <div class="markdown text-center">
+                    {!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $event->description) !!}
+                </div>
             </div>
         </div>
 
