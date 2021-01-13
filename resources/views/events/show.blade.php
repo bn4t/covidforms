@@ -18,7 +18,7 @@
 
     </x-slot>
 
-    <div class="mt-10 max-w-6xl mx-auto px-5 pb-5">
+    <div class="mt-10 max-w-6xl mx-auto px-5 pb-10">
         <div class="flex flex-wrap justify-between items-baseline">
             <div class="max-w-xl">
                 <h1 class="text-2xl mb-1">{{ $event->title }}</h1>
