@@ -18,16 +18,16 @@ Datum: {{ \Carbon\Carbon::parse($event->date)->format('d.m.Y') }}
 @foreach($attendees as $att)
 @switch($att->type)
 @case('adult')
-| {{ addcslashes($att->first_name , '\ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\ `*[]()#+-.!') }}| Erwachsener | {{ addcslashes($att->comment , '\ `*[]()#+-.!') }} |
+| {{ addcslashes($att->first_name , '\_ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\_ `*[]()#+-.!') }}| Erwachsener | {{ addcslashes($att->comment , '\_ `*[]()#+-.!') }} |
 @break
 @case('child_old')
-| {{ addcslashes($att->first_name , '\ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\ `*[]()#+-.!') }} | Kind (2. Kl. - 6. Kl.) | {{ addcslashes($att->comment , '\ `*[]()#+-.!') }} |
+| {{ addcslashes($att->first_name , '\_ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\_ `*[]()#+-.!') }} | Kind (2. Kl. - 6. Kl.) | {{ addcslashes($att->comment , '\_ `*[]()#+-.!') }} |
 @break
 @case('child_young')
-| {{ addcslashes($att->first_name , '\ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\ `*[]()#+-.!') }} | Kind (3 Jahre - 1. Kl.) | {{ addcslashes($att->comment , '\ `*[]()#+-.!') }} |
+| {{ addcslashes($att->first_name , '\_ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\_ `*[]()#+-.!') }} | Kind (3 Jahre - 1. Kl.) | {{ addcslashes($att->comment , '\_ `*[]()#+-.!') }} |
 @break
 @case('baby')
-| {{ addcslashes($att->first_name , '\ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\ `*[]()#+-.!') }} | Kleinkind (0 - 3 Jahre) | {{ addcslashes($att->comment , '\ `*[]()#+-.!') }} |
+| {{ addcslashes($att->first_name , '\_ `*[]()#+-.!') }} | {{ addcslashes($att->last_name , '\_ `*[]()#+-.!') }} | Kleinkind (0 - 3 Jahre) | {{ addcslashes($att->comment , '\_ `*[]()#+-.!') }} |
 @break
 @endswitch
 @endforeach
