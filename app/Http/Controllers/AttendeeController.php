@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\SignupSuccessful;
 use App\Models\Attendee;
-use App\Models\AttendeeSeat;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

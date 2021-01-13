@@ -15,14 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/signup/{date}', [AttendeeController::class, 'create'])->name('attendees.create');
+Route::middleware(['throttle:global'])->group(function () {
+    Route::get('/signup/{date}', [AttendeeController::class, 'create'])->name('attendees.create');
 
-Route::resource('events', EventController::class);
-Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
-Route::post('/events/{event}/new_attendee', [AttendeeController::class, 'store'])->name('attendees.store');
-Route::get('/events/{event}/download_attendees', [AttendeeController::class, 'downloadCsv'])->name('attendees.download_csv');
+    Route::resource('events', EventController::class);
+    Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
+    Route::post('/events/{event}/new_attendee', [AttendeeController::class, 'store'])->name('attendees.store');
+    Route::get('/events/{event}/download_attendees', [AttendeeController::class, 'downloadCsv'])->name('attendees.download_csv');
 
 
-Route::resource('attendees', AttendeeController::class)->only('destroy');
+    Route::resource('attendees', AttendeeController::class)->only('destroy');
 
-require __DIR__.'/auth.php';
+    require __DIR__.'/auth.php';
+});
+
+
+

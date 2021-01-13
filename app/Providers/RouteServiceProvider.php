@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+     protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -56,6 +56,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
+        RateLimiter::for('global', function (Request $request) {
+            return Limit::perHour(1200)->by(optional($request->ip())); // request every 3 seconds
+        });
+
+        RateLimiter::for('auth', function (Request $request) {
+            return Limit::perHour(120)->by(optional($request->ip()));
+        });
+
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
