@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="flex items-center flex-wrap justify-center md:justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-5 md:mb-0">
                 {{ __('Event') }}
             </h2>
             <div class="flex items-center">
@@ -18,7 +18,7 @@
 
     </x-slot>
 
-    <div class="mt-10 max-w-6xl mx-auto">
+    <div class="mt-10 max-w-6xl mx-auto px-5 pb-5">
         <div class="flex flex-wrap justify-between items-baseline">
             <div class="max-w-xl">
                 <h1 class="text-2xl mb-1">{{ $event->title }}</h1>
@@ -51,8 +51,8 @@
                 </div>
             </div>
 
-            <div class="max-w-2xl">
-                <h2 class="sm:mt-3 md:mt-0 text-2xl mb-1">Beschreibung</h2>
+            <div class="max-w-2xl mt-10 md:mt-0">
+                <h2 class="text-2xl mb-1">Beschreibung</h2>
                 <p>{{ $event->description }}</p>
             </div>
         </div>
