@@ -23,7 +23,7 @@
 
     </x-slot>
 
-    <div class="mt-10 max-w-6xl mx-auto px-5 pb-10">
+    <div class="mt-10 max-w-6xl mx-auto px-5 pb-32">
         <div class="flex flex-wrap justify-between items-baseline">
             <div class="max-w-xl">
                 <h1 class="text-2xl mb-1">{{ $event->title }}</h1>
@@ -87,7 +87,7 @@
         </div>
 
 
-        <div class="flex justify-between items-center mb-5 mt-16 mx-1 mb-20">
+        <div class="flex justify-between items-center mb-5 mt-16 mx-1">
             <div>
                 <h2 class="text-2xl mb-3" id="attendees">Anmeldungen</h2>
                 @if(count($event->attendees()->get()) > 0)
