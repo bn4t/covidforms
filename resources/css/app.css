@@ -21,7 +21,7 @@ Markdown styles
 */
 
 .markdown hr {
-    @apply my-3;
+    @apply my-4;
 }
 
 .markdown ul {
@@ -31,25 +31,24 @@ Markdown styles
     @apply ml-8
 }
 
-
-.markdown h1 {
-    @apply text-4xl;
-}
-
 .markdown ul > li > ul > li > ul > li {
     @apply ml-10
 }
 
+.markdown h1 {
+    @apply text-4xl mb-2;
+}
+
 .markdown h2 {
-    @apply text-3xl;
+    @apply text-3xl mb-1;
 }
 
 .markdown h3 {
-    @apply text-2xl;
+    @apply text-2xl mb-1;
 }
 
 .markdown h4 {
-    @apply text-xl;
+    @apply text-xl mb-1;
 }
 
 .markdown a {
