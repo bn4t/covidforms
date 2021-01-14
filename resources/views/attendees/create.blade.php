@@ -13,6 +13,9 @@
                 </svg>
                 <span class="ml-1">{{ \Carbon\Carbon::parse($event->date)->format('d.m.Y') }}</span>
             </p>
+
+            <div class="circle-spinner mx-auto my-6" id="spinner" hidden></div>
+
             <div
                 class="mt-10 bg-green-400 shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold"
                 hidden id="success-display">
@@ -30,7 +33,7 @@
                 <p class="mb-6 bg-red-400 shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold"
                    id="error-display" hidden></p>
 
-                @if($event->remainingAdultSeats() == 0 && $event->remainingChildrenOldSeats() == 0 && $event->remainingChildrenYoungSeats() == 0 &&
+            @if($event->remainingAdultSeats() == 0 && $event->remainingChildrenOldSeats() == 0 && $event->remainingChildrenYoungSeats() == 0 &&
 $event->remainingBabySeats() == 0)
                     <div
                         class="mt-10 bg-gray-800 opacity-90  shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold">
@@ -218,6 +221,9 @@ $event->remainingBabySeats() == 0)
                         function submitData(e) {
                             e.preventDefault()
 
+                            document.getElementById('hide-on-success').hidden = true;
+                            document.getElementById('spinner').hidden = false;
+
                             let adults = 0;
                             let children_old = 0;
                             let children_young = 0;
@@ -244,12 +250,19 @@ $event->remainingBabySeats() == 0)
                                 children_old > remainingSeats.children_old ||
                                 children_young > remainingSeats.children_young ||
                                 babies > remainingSeats.babies) {
+
+                                document.getElementById('spinner').hidden = true;
+                                document.getElementById('hide-on-success').hidden = false;
                                 showError("Nicht genügend freie Plätze für eingetragene Teilnehmer vorhanden.")
                                 return
                             }
 
                             axios.post('{{ route('attendees.store', $event) }}', attendees)
                                 .catch(function (error) {
+
+                                    document.getElementById('spinner').hidden = true;
+                                    document.getElementById('hide-on-success').hidden = false;
+
                                     if (error.response.status === 400) {
                                         showError("Nicht genügend freie Plätze für eingetragene Teilnehmer vorhanden.")
                                     } else {
@@ -258,8 +271,8 @@ $event->remainingBabySeats() == 0)
                                     }
                                 })
                                 .then(function () {
+                                    document.getElementById('spinner').hidden = true;
                                     document.getElementById('success-display').hidden = false;
-                                    document.getElementById('hide-on-success').hidden = true;
                                 })
                             return false;
                         }
