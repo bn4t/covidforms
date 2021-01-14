@@ -29,7 +29,7 @@
                        value="{{ old('title') }}" required>
             </div>
             <div class="flex items-center mb-10 flex-wrap">
-                <label for="date" class="text-2xl flex-1 mr-3 md:mr-0">Datum</label>
+                <label for="date" class="text-xl flex-1 mr-3 md:mr-0">Datum</label>
                 <input style="width: 15rem;" type="date" id="date" name="date" class="w-full md:w-auto flex-grow rounded-lg py-1 px-3"
                        value="{{ old('date') }}" required>
             </div>
