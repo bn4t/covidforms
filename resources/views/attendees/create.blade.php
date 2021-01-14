@@ -193,11 +193,15 @@ $event->remainingBabySeats() == 0)
 
                         function attendee() {
                             att_index++
+                            let prefilled_last_name = ""
+                            if (attendees.length > 0) {
+                                prefilled_last_name = attendees[0].last_name
+                            }
                             return {
                                 id: att_index,
                                 att: {
                                     first_name: "",
-                                    last_name: "",
+                                    last_name: prefilled_last_name,
                                     att_type: "adult",
                                     comment: ""
                                 },
