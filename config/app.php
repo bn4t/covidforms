@@ -229,4 +229,5 @@ return [
 
     ],
 
+    'registration_code' => env('REGISTRATION_CODE')
 ];
