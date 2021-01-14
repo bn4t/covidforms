@@ -20,8 +20,8 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 Markdown styles
 */
 
-.markdown h1 {
-    @apply text-4xl;
+.markdown hr {
+    @apply my-3;
 }
 
 .markdown ul {
@@ -29,6 +29,11 @@ Markdown styles
 }
 .markdown ul > li > ul > li {
     @apply ml-8
+}
+
+
+.markdown h1 {
+    @apply text-4xl;
 }
 
 .markdown ul > li > ul > li > ul > li {
