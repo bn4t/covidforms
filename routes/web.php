@@ -33,7 +33,6 @@ Route::middleware(['throttle:global'])->group(function () {
 });
 
 Route::get('/', function () {
-    dd(config('app.registration_code'));
     return redirect('/login');
 });
 
