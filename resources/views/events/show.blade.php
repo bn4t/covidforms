@@ -87,7 +87,7 @@
         </div>
 
 
-        <div class="flex justify-between items-center mb-5 mt-16 mx-1">
+        <div class="flex justify-between items-center mb-5 mt-16 mx-1 mb-20">
             <div>
                 <h2 class="text-2xl mb-3" id="attendees">Anmeldungen</h2>
                 @if(count($event->attendees()->get()) > 0)
@@ -146,7 +146,7 @@
                     <line x1="15" y1="9" x2="9" y2="15"></line>
                     <line x1="9" y1="9" x2="15" y2="15"></line>
                 </svg>
-                <p class="text-center text-xl text-gray-600 mt-3 mb-20">Noch keine Anmeldungen.</p>
+                <p class="text-center text-xl text-gray-600 mt-3">Noch keine Anmeldungen.</p>
             </div>
 
         @elseif(count($attendees) == 0)
@@ -158,7 +158,7 @@
                     <line x1="15" y1="9" x2="9" y2="15"></line>
                     <line x1="9" y1="9" x2="15" y2="15"></line>
                 </svg>
-                <p class="text-center text-xl text-gray-600 mt-3 mb-20">Keine Anmeldungen, welche dem Filter entsprechen.</p>
+                <p class="text-center text-xl text-gray-600 mt-3">Keine Anmeldungen, welche dem Filter entsprechen.</p>
             </div>
         @else
             <div class="max-w-6xl mx-auto">
