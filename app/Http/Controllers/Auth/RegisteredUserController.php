@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'code' => 'required|string|in:'.env('REGISTRATION_CODE', 'foo')
+            'code' => 'required|string|in:'.config('app.registration_code')
         ]);
 
         Auth::login($user = User::create([
