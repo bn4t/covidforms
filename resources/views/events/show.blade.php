@@ -89,32 +89,32 @@
 
         <div class="flex justify-between items-center mb-5 mt-16 mx-1">
             <div>
-                <h2 class="text-2xl mb-3">Anmeldungen</h2>
+                <h2 class="text-2xl mb-3" id="attendees">Anmeldungen</h2>
                 @if(count($event->attendees()->get()) > 0)
                     <div class="flex items-center flex-wrap">
                         <p class="text-lg text-gray-800 mr-2">Filter</p>
                         <div class="flex flex-wrap">
-                            <a {{ $filter == 'none' ? "" : "href=".route('events.show', $event) }}
+                            <a {{ $filter == 'none' ? "" : "href=".route('events.show', $event)."#attendees" }}
                                class="{{ $filter == 'none' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">
                                 Kein Filter
                             </a>
 
-                            <a {{ $filter == 'adult' ? "" : "href=".route('events.show', $event)."?filter_type=adult" }}
+                            <a {{ $filter == 'adult' ? "" : "href=".route('events.show', $event)."?filter_type=adult#attendees" }}
                                class="{{ $filter == 'adult' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">
                                 Erwachsene
                             </a>
 
-                            <a {{ $filter == 'child_old' ? "" : "href=".route('events.show', $event)."?filter_type=child_old" }}
+                            <a {{ $filter == 'child_old' ? "" : "href=".route('events.show', $event)."?filter_type=child_old#attendees" }}
                                class="{{ $filter == 'child_old' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">Kind
                                 (2. Kl. - 6. Kl.)
                             </a>
 
-                            <a {{ $filter == 'child_young' ? "" : "href=".route('events.show', $event)."?filter_type=child_young" }}
+                            <a {{ $filter == 'child_young' ? "" : "href=".route('events.show', $event)."?filter_type=child_young#attendees" }}
                                class="{{ $filter == 'child_young' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">
                                 Kind (3 Jahre - 1. Kl.)
                             </a>
 
-                            <a {{ $filter == 'baby' ? "" : "href=".route('events.show', $event)."?filter_type=baby" }}
+                            <a {{ $filter == 'baby' ? "" : "href=".route('events.show', $event)."?filter_type=baby#attendees" }}
                                class="{{ $filter == 'baby' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">
                                 Kinderhüte
                             </a>
