@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -20,7 +21,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('events.index', ['events' => Event::all()->sortBy('date',SORT_DESC)]);
+        return view('events.index', ['events' => Event::all()->sortByDesc('date')->all()]);
     }
 
     /**
@@ -76,9 +77,9 @@ class EventController extends Controller
         $att = null;
 
         if ($request->input('filter_type') != "") {
-            $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get();
+            $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get()->sortByDesc('created_at');
         } else {
-            $att = $event->attendees()->get();
+            $att = $event->attendees()->get()->sortByDesc('created_at');
         }
 
         return view('events.show', [
