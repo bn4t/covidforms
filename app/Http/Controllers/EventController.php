@@ -77,9 +77,9 @@ class EventController extends Controller
         $att = null;
 
         if ($request->input('filter_type') != "") {
-            $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get()->sortByDesc('created_at');
+            $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get()->sortByDesc('last_name');
         } else {
-            $att = $event->attendees()->get()->sortByDesc('created_at');
+            $att = $event->attendees()->get()->sortByDesc('last_name');
         }
 
         return view('events.show', [
