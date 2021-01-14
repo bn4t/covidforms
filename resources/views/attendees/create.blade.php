@@ -1,6 +1,6 @@
 <x-guest-layout>
-    <div class="bg-gradient-to-r from-indigo-400 to-blue-500 h-full min-h-screen pt-5 px-3 md:pt-20 pb-10">
-        <div class="rounded-3xl shadow-lg p-9 bg-white max-w-4xl mx-auto">
+    <div class="bg-gray-100 h-full min-h-screen pt-5 px-3 md:pt-20 pb-10">
+        <div class="rounded-3xl shadow-lg p-9 bg-white max-w-4xl mx-auto border border-gray-200">
             <h1 class="text-4xl text-center">{{ $event->title }}</h1>
             <p class="mt-1 text-gray-700 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -33,12 +33,12 @@
                 @if($event->remainingAdultSeats() == 0 && $event->remainingChildrenOldSeats() == 0 && $event->remainingChildrenYoungSeats() == 0 &&
 $event->remainingBabySeats() == 0)
                     <div
-                        class="mt-10 bg-blue-500 shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold">
+                        class="mt-10 bg-gray-800 opacity-90  shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold">
                         <p>Leider sind für diesen Event schon alle Plätze besetzt.</p>
                     </div>
                 @else
 
-                    <div class="w-72 mx-auto py-2 px-4 bg-blue-500 rounded-lg shadow text-white mb-5">
+                    <div class="w-72 mx-auto py-2 px-4 bg-gray-800 opacity-90 rounded-lg shadow text-white mb-5">
                         <p class="text-center text-lg">Verbleibende Plätze</p>
                         <div class="flex justify-between items-center">
                             <p>Erwachsene: </p>
@@ -67,7 +67,7 @@ $event->remainingBabySeats() == 0)
                             <div class="w-60 mx-auto mt-8 mb-3">
                                 <label for="email" class="block ml-1 mb-1">Email Adresse</label>
                                 <input id="email" name="email" type="email"
-                                       class="py-1 px-3 rounded-lg bg-white w-full border border-blue-500 text-gray-800"
+                                       class="py-1 px-3 rounded-lg bg-white w-full border border-gray-700 text-gray-800"
                                        required>
                             </div>
 
@@ -75,7 +75,7 @@ $event->remainingBabySeats() == 0)
                             <div class="flex flex-wrap items-center justify-center max-w-3xl mx-auto ">
                                 <template x-for="i in forms">
                                     <div x-data="attendee()"
-                                         class="bg-blue-500 shadow text-white rounded-lg py-4 px-5 max-w-xs my-5 mx-4">
+                                         class="bg-gray-800 opacity-90 shadow text-white rounded-lg py-4 px-5 max-w-xs my-5 mx-4">
                                         <p class="text-2xl text-center mb-4">Teilnehmer</p>
 
                                         <div class="my-2">
@@ -119,7 +119,7 @@ $event->remainingBabySeats() == 0)
 
                             <div class="flex items-center justify-center max-w-lg mx-auto flex-wrap">
                                 <button x-on:click="addForm()" type="button"
-                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
+                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-gray-800 opacity-90 hover:bg-gray-700 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -132,7 +132,7 @@ $event->remainingBabySeats() == 0)
                                     <span class="ml-1">Hinzufügen</span>
                                 </button>
                                 <button x-on:click="remForm()" type="button"
-                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-400 flex items-center mx-1">
+                                        class="rounded-lg py-1 px-3 text-white font-semibold bg-gray-800 opacity-90 hover:bg-gray-700 flex items-center mx-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -146,7 +146,7 @@ $event->remainingBabySeats() == 0)
                             </div>
 
                             <button type="submit"
-                                    class="py-1 text-lg px-6 bg-gradient-to-r from-indigo-400 to-blue-500 hover:bg-blue-500 text-white text-center font-semibold rounded-lg block mx-auto mt-8">
+                                    class="py-1 text-lg px-6 bg-gray-800 opacity-90 hover:bg-gray-700 text-white text-center font-semibold rounded-lg block mx-auto mt-8">
                                 Anmelden
                             </button>
                         </div>
