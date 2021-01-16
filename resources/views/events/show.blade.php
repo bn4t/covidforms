@@ -10,7 +10,7 @@
                 <a href="{{ route('events.edit', $event) }}"
                    class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2">Bearbeiten</a>
                 <form method="post" action="{{ route('events.destroy', $event) }}"
-                      onsubmit="return confirm('Event löschen?');">
+                      onsubmit="return confirm('Event {{ $event->title }} löschen?');">
                     @method('delete')
                     @csrf
                     <button type="submit"
@@ -228,7 +228,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <form method="post" action="{{ route('attendees.destroy', $att) }}"
-                                                      onsubmit="return confirm('Anmeldung löschen?');">
+                                                      onsubmit="return confirm('Anmeldung für {{ $att->first_name }} {{ $att->last_name }} löschen?');">
                                                     @method('delete')
                                                     @csrf
                                                     <button type="submit"
