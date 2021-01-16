@@ -71,7 +71,7 @@ $event->remainingBabySeats() == 0)
                                 <label for="email" class="block ml-1 mb-1">Email Adresse</label>
                                 <input id="email" name="email" type="email"
                                        class="py-1 px-3 rounded-lg bg-white w-full border border-gray-700 text-gray-800"
-                                       required>
+                                       required autofocus>
                             </div>
 
 
