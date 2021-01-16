@@ -228,7 +228,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <form method="post" action="{{ route('attendees.destroy', $att) }}"
-                                                      onsubmit="return confirm('Anmeldung für {{ $att->first_name }} {{ $att->last_name }} löschen?');">
+                                                      onsubmit="return confirm('Anmeldung von {{ $att->first_name }} {{ $att->last_name }} löschen?');">
                                                     @method('delete')
                                                     @csrf
                                                     <button type="submit"
