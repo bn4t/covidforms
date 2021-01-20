@@ -44,7 +44,7 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'date' => 'required|after_or_equal:today|date',
+            'date' => 'required|after_or_equal:today|date|unique:events,date',
             'description' => 'required|max:2048',
             'max_adults' => 'required|integer|min:0',
             'max_children_old' => 'required|integer|min:0',
