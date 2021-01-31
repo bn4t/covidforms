@@ -56,5 +56,5 @@ Markdown styles
 }
 
 .markdown img {
-    @apply mx-auto rounded-lg shadow my-5
+    @apply mx-auto rounded-lg shadow my-6
 }
