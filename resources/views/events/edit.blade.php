@@ -46,7 +46,7 @@
             </div>
             <div class="flex items-center mb-10 flex-wrap">
                 <label for="max_children_young" class="text-xl flex-1">Max. Kinder (3 Jahre - 1. Kl.)</label>
-                <input type="number" min="0" id="max_children_young" name="max_children_young" class="flex-grow rounded-lg py-1 px-3" value="{{ old('max_children_young') ??  $event->max_children_young }}" required>
+                <input type="number" min="0" id="max_children_young" name="max_children_young" class="w-full md:w-auto flex-grow rounded-lg py-1 px-3" value="{{ old('max_children_young') ??  $event->max_children_young }}" required>
             </div>
             <div class="flex items-center mb-10 flex-wrap">
                 <label for="max_babies" class="text-xl flex-1">Max. Kinderhüti</label>
