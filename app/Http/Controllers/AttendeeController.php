@@ -29,9 +29,21 @@ class AttendeeController extends Controller
     public function create($date)
     {
 
-        $datetime = Carbon::parse($date)->format('Y-m-d');
+        // try parsing the date
+        $datetime = null;
+        try {
+            $datetime = Carbon::parse($date);
+        }catch (Exception $e) {
+            return view('events.404');
+        }
 
-        $ev = Event::where('date', $datetime)->first();
+        // prevent signups after the event already happened
+        // we need to sub a day from the current date to allow guests to still signup on the day of the event
+        if (Carbon::now()->subDay()->isAfter($datetime)) {
+            return view('events.expired');
+        }
+
+        $ev = Event::where('date', $datetime->format('Y-m-d'))->first();
         if ($ev == null) {
             return view('events.404');
         }
