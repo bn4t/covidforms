@@ -29,7 +29,7 @@
     <div class="mt-10 max-w-6xl mx-auto px-5 pb-32">
         <div class="flex flex-wrap justify-between items-baseline">
             <div class="max-w-xl">
-                <h1 class="text-2xl mb-1">{{ $event->title }}</h1>
+                <h1 class="text-3xl mb-1">{{ $event->title }}</h1>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -82,7 +82,7 @@
             </div>
 
             <div class="max-w-2xl mt-10 md:mt-0 w-full">
-                <h2 class="text-2xl mb-1">Beschreibung</h2>
+                <h2 class="text-3xl mb-1">Beschreibung</h2>
                 <div class="markdown text-center">
                     {!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $event->description) !!}
                 </div>
@@ -90,13 +90,14 @@
         </div>
 
 
-        <div class="flex justify-between items-center mb-5 mt-16 mx-1">
+        <div class="flex justify-between items-end mb-5 mt-16 mx-1">
             <div>
-                <h2 class="text-2xl mb-3" id="attendees">Anmeldungen</h2>
+                <h2 class="text-3xl mb-3" id="attendees">Anmeldungen</h2>
                 @if(count($event->attendees()->get()) > 0)
+                    <p class="text-lg text-gray-800 mr-2">Filter</p>
+
                     <div class="flex items-center flex-wrap">
-                        <p class="text-lg text-gray-800 mr-2">Filter</p>
-                        <div class="flex flex-wrap">
+                        <div class="flex flex-wrap md:flex-row flex-col">
                             <a {{ $filter == 'none' ? "" : "href=".route('events.show', $event)."#attendees" }}
                                class="{{ $filter == 'none' ? "bg-gray-800 text-white" : "bg-gray-300 hover:bg-gray-200" }} py-0.5 px-2 rounded-lg mr-1 text-sm my-1">
                                 Kein Filter
@@ -128,7 +129,7 @@
 
             @if(count($event->attendees()->get()) > 0)
                 <a href="{{ route('attendees.download_csv', $event) }}{{$filter == 'none' ? '': '?filter_type='.$filter }}"
-                   class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg flex items-center">
+                   class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg flex items-center mb-1 md:mb-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="feather feather-download">
