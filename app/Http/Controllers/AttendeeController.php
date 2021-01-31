@@ -33,7 +33,7 @@ class AttendeeController extends Controller
 
         $ev = Event::where('date', $datetime)->first();
         if ($ev == null) {
-            abort(404);
+            return view('events.404');
         }
 
         return view('attendees.create', [
