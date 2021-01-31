@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center flex-wrap justify-center md:justify-between">
+        <div class="flex items-center flex-col md:flex-row flex-wrap justify-center md:justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-5 md:mb-0">
                 {{ __('Event') }}
             </h2>
