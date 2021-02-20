@@ -31,6 +31,6 @@ Datum: {{ \Carbon\Carbon::parse($event->date)->format('d.m.Y') }}
 @endforeach
 @endcomponent
 
-Deine Benachrichtigungseinstellungen für diesen Event kannst du auf der Event Übersichts-Seite ändern.
+Deine Benachrichtigungseinstellungen für diesen Event kannst du [hier]({{route('notification_settings.edit', $event)}}) ändern.
 
 @endcomponent
