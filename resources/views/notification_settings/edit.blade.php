@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Benachrichtigungseinstellungen')}}
+                {{ __('Benachrichtigungen')}}
             </h2>
             <div class="flex items-center">
                 <a href="{{ route('events.show', $event) }}"
@@ -16,7 +16,7 @@
 
     <div class="mt-10 max-w-3xl mx-auto px-5 pb-10">
 
-        <h1 class="text-3xl mb-1">Benachrichtigungseinstellungen</h1>
+        <h1 class="text-3xl mb-1">Benachrichtigungen</h1>
         <h2 class="text-lg mb-10">Event: {{$event->title}}</h2>
 
         @if ($errors->any())
