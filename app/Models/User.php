@@ -11,6 +11,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+
+    public function eventNotificationSetting(Event $event)
+    {
+        return $this->hasMany(EventNotificationSetting::class)->where('event_id', $event->id)->get();
+    }
+
     /**
      * The attributes that are mass assignable.
      *

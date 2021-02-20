@@ -26,6 +26,8 @@ Route::middleware(['throttle:global'])->group(function () {
     Route::post('/events/{event}/new_attendee', [AttendeeController::class, 'store'])->name('attendees.store');
     Route::get('/events/{event}/download_attendees', [AttendeeController::class, 'downloadCsv'])->name('attendees.download_csv');
 
+    Route::get('/events/{event}/notifications', [\App\Http\Controllers\EventNotificationSettingController::class, 'edit'])->name('notification_settings.edit');
+    Route::post('/events/{event}/notifications', [\App\Http\Controllers\EventNotificationSettingController::class, 'store'])->name('notification_settings.store');
 
     Route::resource('attendees', AttendeeController::class)->only('destroy');
 

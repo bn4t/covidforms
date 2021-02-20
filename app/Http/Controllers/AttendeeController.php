@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminAttendeeSignedUp;
 use App\Mail\SignupSuccessful;
 use App\Models\Attendee;
 use App\Models\Event;
+use App\Models\EventNotificationSetting;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +36,7 @@ class AttendeeController extends Controller
         $datetime = null;
         try {
             $datetime = Carbon::parse($date);
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             return view('events.404');
         }
 
@@ -64,14 +67,14 @@ class AttendeeController extends Controller
         $headers = [
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0'
             , 'Content-type' => 'text/csv'
-            , 'Content-Disposition' => 'attachment; filename=Teilnehmer-'.str_replace(' ', '-',$event->title).'-'.Carbon::parse($event->date)->format('Y-m-d').'.csv'
+            , 'Content-Disposition' => 'attachment; filename=Teilnehmer-' . str_replace(' ', '-', $event->title) . '-' . Carbon::parse($event->date)->format('Y-m-d') . '.csv'
             , 'Expires' => '0'
             , 'Pragma' => 'public'
         ];
 
         $att = null;
         if ($request->input('filter_type') != "") {
-            $att = $event->attendees()->where('type', '=',$request->input('filter_type'));
+            $att = $event->attendees()->where('type', '=', $request->input('filter_type'));
         } else {
             $att = $event->attendees();
         }
@@ -187,6 +190,34 @@ class AttendeeController extends Controller
         }
 
         Mail::to($validated[0]['email'])->queue(new SignupSuccessful($newAttendees, $event));
+
+        foreach (EventNotificationSetting::where('event_id', $event->id)->get() as $setting) {
+            $att_to_notify = [];
+
+            foreach ($newAttendees as $att) {
+                if ($att->type == 'adult' && $setting->notify_adults) {
+                    array_push($att_to_notify, $att);
+                    continue;
+                }
+                if ($att->type == 'child_old' && $setting->notify_children_old) {
+                    array_push($att_to_notify, $att);
+                    continue;
+                }
+                if ($att->type == 'child_young' && $setting->notify_children_young) {
+                    array_push($att_to_notify, $att);
+                    continue;
+                }
+                if ($att->type == 'baby' && $setting->notify_babies) {
+                    array_push($att_to_notify, $att);
+                    continue;
+                }
+            }
+
+            if (count($att_to_notify) > 0) {
+                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp($att_to_notify, $event));
+            }
+        }
+
 
         return view('attendees.create', ['success' => true, 'event' => $event]);
     }
