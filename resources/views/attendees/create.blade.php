@@ -262,11 +262,14 @@ $event->remainingBabySeats() == 0)
                             }
 
                             axios.post('{{ route('attendees.store', $event) }}', attendees)
+                                .then(function () {
+                                    document.getElementById('spinner').hidden = true;
+                                    document.getElementById('success-display').hidden = false;
+                                })
                                 .catch(function (error) {
 
                                     document.getElementById('spinner').hidden = true;
                                     document.getElementById('hide-on-success').hidden = false;
-                                    document.getElementById('success-display').hidden = true;
 
                                     if (error.response.status === 400) {
                                         showError("Nicht genügend freie Plätze für eingetragene Teilnehmer vorhanden.")
@@ -274,10 +277,6 @@ $event->remainingBabySeats() == 0)
                                         showError("Fehler beim Einreichen der Daten. Bitte erneut versuchen.")
                                         console.log(error)
                                     }
-                                })
-                                .then(function () {
-                                    document.getElementById('spinner').hidden = true;
-                                    document.getElementById('success-display').hidden = false;
                                 })
                             return false;
                         }
