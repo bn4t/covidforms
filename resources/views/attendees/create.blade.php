@@ -266,6 +266,7 @@ $event->remainingBabySeats() == 0)
 
                                     document.getElementById('spinner').hidden = true;
                                     document.getElementById('hide-on-success').hidden = false;
+                                    document.getElementById('success-display').hidden = true;
 
                                     if (error.response.status === 400) {
                                         showError("Nicht genügend freie Plätze für eingetragene Teilnehmer vorhanden.")
