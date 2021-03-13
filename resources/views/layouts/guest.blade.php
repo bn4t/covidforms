@@ -15,6 +15,9 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- umami analytics -->
+        <script async defer data-website-id="0b2f0059-46dc-4769-b312-1b4f718dc2bd" src="https://analytics.chrischona-koelliken.ch/umami.js"></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
