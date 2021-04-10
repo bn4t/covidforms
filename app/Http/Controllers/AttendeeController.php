@@ -62,6 +62,21 @@ class AttendeeController extends Controller
     }
 
 
+    // toggle whether an attendee has attended an event
+    public function toggleAttendance(Event $event, Attendee $attendee)
+    {
+        if ($attendee->attended_event == true)
+        {
+            $attendee->attended_event = false;
+        } else {
+            $attendee->attended_event = true;
+        }
+
+        $attendee->save();
+
+        return redirect(route('events.show', $event));
+    }
+
     public function downloadCsv(Event $event, Request $request)
     {
         $headers = [
@@ -79,10 +94,10 @@ class AttendeeController extends Controller
             $att = $event->attendees();
         }
 
-        $list = $att->get(['created_at', 'last_name', 'first_name', 'email', 'type', 'comment'])->toArray();
+        $list = $att->get(['created_at', 'last_name', 'first_name', 'email', 'type', 'comment', 'attended_event'])->toArray();
 
         # add headers for each column in the CSV download
-        array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ', 'Bemerkung']);
+        array_unshift($list, ['Datum Anmeldung', 'Nachname', 'Vorname', 'Email', 'Typ', 'Bemerkung', 'Anwesend']);
 
         $callback = function () use ($list) {
             $FH = fopen('php://output', 'w');
@@ -104,6 +119,12 @@ class AttendeeController extends Controller
                         case 'baby':
                             $row['type'] = 'Kleinkind (0 - 3 Jahre)';
                             break;
+                    }
+
+                    if ($row['attended_event'] == '1') {
+                       $row['attended_event'] = '✔️';
+                    } else {
+                        $row['attended_event'] = '❌';
                     }
                 }
 

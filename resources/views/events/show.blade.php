@@ -206,6 +206,10 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Anwesend
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Manage
                                         </th>
                                     </tr>
@@ -241,6 +245,12 @@
                                             <td class="px-6 py-4 break-words max-w-xs">
                                                 {{ $att->comment }}
                                             </td>
+                                            <td class="px-6 py-4 break-words max-w-xs" sorttable_customkey="{{$att->attended_event}}">
+                                                <form action="{{route('attendees.toggle_attendance', ['event' => $event, 'attendee' => $att])}}" method="post" >
+                                                    @csrf
+                                                    <input type="checkbox"  @if($att->attended_event) {{ 'checked' }} @endif onchange="this.form.submit()">
+                                                </form>
+                                            </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <form method="post" action="{{ route('attendees.destroy', $att) }}"
                                                       onsubmit="return confirm('Anmeldung von {{ $att->first_name }} {{ $att->last_name }} löschen?');">
@@ -251,7 +261,6 @@
                                                         Löschen
                                                     </button>
                                                 </form>
-
                                             </td>
                                         </tr>
                                     @endforeach

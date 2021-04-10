@@ -30,6 +30,7 @@ Route::middleware(['throttle:global'])->group(function () {
     Route::post('/events/{event}/notifications', [\App\Http\Controllers\EventNotificationSettingController::class, 'store'])->name('notification_settings.store');
 
     Route::resource('attendees', AttendeeController::class)->only('destroy');
+    Route::post('/events/{event}/{attendee}/toggle_attendance', [AttendeeController::class, 'toggleAttendance'])->name('attendees.toggle_attendance');
 
     require __DIR__.'/auth.php';
 });
