@@ -13,7 +13,7 @@
         "autoprefixer": "^10.2.6",
         "axios": "^0.21",
         "cross-env": "^7.0",
-        "laravel-mix": "^6.0.19",
+        "laravel-mix": "^6.0.25",
         "lodash": "^4.17.19",
         "postcss": "^8.3.3",
         "postcss-import": "^14.0.2",
