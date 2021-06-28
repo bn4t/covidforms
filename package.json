@@ -19,7 +19,7 @@
         "postcss-import": "^14.0.2",
         "postcss-loader": "^6.1.0",
         "resolve-url-loader": "^4.0.0",
-        "tailwindcss": "^2.1.4",
+        "tailwindcss": "^2.2.4",
         "vue-template-compiler": "^2.6.14"
     }
 }
