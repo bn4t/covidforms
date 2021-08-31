@@ -83,7 +83,7 @@ $event->remainingBabySeats() == 0)
 
                                         <div class="my-2">
                                             <label for="first_name" class="block ml-1 mb-1">Vorname</label>
-                                            <input id="first_name" name="first_name" x-spread="auto_save"
+                                            <input id="first_name" name="first_name" x-bind="auto_save"
                                                    x-model="att.first_name"
                                                    class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"
                                                    required>
@@ -91,7 +91,7 @@ $event->remainingBabySeats() == 0)
 
                                         <div class="my-2">
                                             <label for="last_name" class="block ml-1 mb-1">Nachname</label>
-                                            <input id="last_name" name="last_name" x-spread="auto_save"
+                                            <input id="last_name" name="last_name" x-bind="auto_save"
                                                    x-model="att.last_name"
                                                    class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"
                                                    required>
@@ -99,7 +99,7 @@ $event->remainingBabySeats() == 0)
 
                                         <div class="my-2">
                                             <label for="last_name" class="block ml-1 mb-1">Bemerkung (Optional)</label>
-                                            <textarea id="last_name" name="last_name" x-spread="auto_save" cols="28" rows="1" maxlength="1024"
+                                            <textarea id="last_name" name="last_name" x-bind="auto_save" cols="28" rows="1" maxlength="1024"
                                                    x-model="att.comment"
                                                       class="py-1 px-3 rounded-lg bg-white w-full border border-gray-200 text-gray-800"></textarea>
                                         </div>
@@ -108,7 +108,7 @@ $event->remainingBabySeats() == 0)
                                             <label for="type" class="block ml-1 mb-1">Typ</label>
                                             <select name="type" id="type"
                                                     class="rounded-lg w-full border border-gray-200 text-gray-800"
-                                                    x-spread="auto_save" x-model="att.att_type" required>
+                                                    x-bind="auto_save" x-model="att.att_type" required>
                                                 <option value="adult">Erwachsener</option>
                                                 <option value="child_old">Kind (2. Kl. - 6. Kl.)</option>
                                                 <option value="child_young">Kind (3 Jahre - 1. Kl.)</option>
