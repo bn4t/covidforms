@@ -6,19 +6,32 @@
             </h2>
             <div class="flex flex-col items-start md:flex-row md:items-center">
                 <a href="{{ route('attendees.create', \Carbon\Carbon::parse($event->date)->format('d.m.Y')) }}"
-                   class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2 flex items-center my-1" target="_blank">
-                    <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                   class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2 flex items-center my-1"
+                   target="_blank">
+                    <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                         stroke="currentColor" class="w-4 h-4">
+                        <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
                     <span class="ml-2">Aufrufen</span>
                 </a>
 
                 <a href="{{ route('notification_settings.edit', $event) }}"
                    class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2 flex items-center my-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
                     <span class="ml-2">Benachrichtigungen</span>
                 </a>
                 <a href="{{ route('events.edit', $event) }}"
                    class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2 flex items-center my-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="w-4 h-4">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
                     <span class="ml-2">Bearbeiten</span>
                 </a>
                 <form method="post" action="{{ route('events.destroy', $event) }}"
@@ -27,7 +40,15 @@
                     @csrf
                     <button type="submit"
                             class="bg-red-600 hover:bg-red-500 text-white font-semibold py-1 px-3 rounded-lg flex items-center my-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="w-4 h-4">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path
+                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
                         <span class="ml-2">Löschen</span>
                     </button>
                 </form>
@@ -69,7 +90,8 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_old')->count() }}/{{ $event->max_children_old }} Kinder (2. Kl. - 6. Kl.)</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_old')->count() }}
+                        /{{ $event->max_children_old }} Kinder (2. Kl. - 6. Kl.)</p>
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -78,7 +100,8 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_young')->count() }}/{{ $event->max_children_young }} Kinder (3 Jahre - 1. Kl.)</p>
+                    <p class="ml-2">{{ $event->attendees()->where('type', 'child_young')->count() }}
+                        /{{ $event->max_children_young }} Kinder (3 Jahre - 1. Kl.)</p>
                 </div>
                 <div class="flex items-center mb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -245,10 +268,14 @@
                                             <td class="px-6 py-4 break-words max-w-xs">
                                                 {{ $att->comment }}
                                             </td>
-                                            <td class="px-6 py-4 break-words max-w-xs" sorttable_customkey="{{$att->attended_event}}">
-                                                <form action="{{route('attendees.toggle_attendance', ['event' => $event, 'attendee' => $att])}}" method="post" >
+                                            <td class="px-6 py-4 break-words max-w-xs"
+                                                sorttable_customkey="{{$att->attended_event}}">
+                                                <form
+                                                    action="{{route('attendees.toggle_attendance', ['event' => $event, 'attendee' => $att])}}"
+                                                    method="post">
                                                     @csrf
-                                                    <input type="checkbox"  @if($att->attended_event) {{ 'checked' }} @endif onchange="this.form.submit()">
+                                                    <input type="checkbox"
+                                                           @if($att->attended_event) {{ 'checked' }} @endif onchange="this.form.submit()">
                                                 </form>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -272,6 +299,59 @@
                 </div>
             </div>
         @endif
+
+        <div class="mt-10">
+            <h3 class="text-xl">Anmeldung hinzufügen</h3>
+            <p class="text-sm">Teilnehmer, welche über das admin interface angemeldet wurden, erhalten keine Bestätigungsmail.</p>
+
+            @if ($errors->any())
+                <div
+                    class="my-6 bg-red-400 shadow-lg rounded-3xl py-4 px-6 max-w-xs mx-auto text-white text-center font-semibold">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="/events/{{ $event->id }}/new_attendee_admin" method="post">
+                @csrf
+                <div class="flex flex-col md:flex-row md:items-center items-start mt-3 justify-start">
+                    <div class="flex flex-col md:mr-2 my-2">
+                        <label for="last_name" class="text-sm mb-1">Nachname</label>
+                        <input type="text" id="last_name" name="last_name" class="w-48 flex-grow rounded-lg py-1 px-3"
+                               value="{{ old('last_name') }}" required>
+                    </div>
+                    <div class="flex flex-col md:mx-2 my-2">
+                        <label for="first_name" class="text-sm mb-1">Vorname</label>
+                        <input type="text" id="first_name" name="first_name" class="w-48 flex-grow rounded-lg py-1 px-3"
+                               value="{{ old('first_name') }}" required>
+                    </div>
+                    <div class="flex flex-col md:mx-2 my-2">
+                        <label for="email" class="text-sm mb-1">Email</label>
+                        <input type="email" id="email" name="email" class="w-48 flex-grow rounded-lg py-1 px-3"
+                               value="{{ old('email') }}" required>
+                    </div>
+                    <div class="flex flex-col md:mx-2 my-2">
+                        <label for="type" class="text-sm mb-1">Typ</label>
+                        <select name="type" id="type"
+                                class="rounded-lg w-48 text-sm" required>
+                            <option value="adult">Erwachsener</option>
+                            <option value="child_old">Kind (2. Kl. - 6. Kl.)</option>
+                            <option value="child_young">Kind (3 Jahre - 1. Kl.)</option>
+                            <option value="baby">Kleinkind (0 - 3 Jahre)</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col md:mx-2 my-2">
+                        <label for="comment" class="text-sm mb-1">Bemerkung</label>
+                        <input type="text" id="comment" name="comment" class="w-48 flex-grow rounded-lg py-1 px-3"
+                               value="{{ old('comment') }}">
+                    </div>
+                </div>
+                <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg flex items-center my-2">Speichern</button>
+            </form>
+         </div>
 
     </div>
 

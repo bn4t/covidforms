@@ -244,6 +244,56 @@ class AttendeeController extends Controller
     }
 
 
+    /*
+     * Method to add an attendee from the admin interface
+     *
+     * */
+    public function store_admin(Request $request, Event $event)
+    {
+
+        $validated = $request->validate(
+            [
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'required|max:255|email',
+                'type' => 'required|in:adult,child_old,child_young,baby',
+                'comment' => 'max:1024'
+            ]);
+
+
+        $attendee = new Attendee;
+        $attendee->event_id = $event->id;
+        $attendee->first_name = $validated['first_name'];
+        $attendee->last_name = $validated['last_name'];
+        $attendee->email = $validated['email'];
+        $attendee->type = $validated['type'];
+        $attendee->comment = $validated['comment'];
+        $attendee->save();
+
+        // send out relevant notification for subscribers
+        foreach (EventNotificationSetting::where('event_id', $event->id)->get() as $setting) {
+            if ($attendee->type == 'adult' && $setting->notify_adults) {
+                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                continue;
+            }
+            if ($attendee->type == 'child_old' && $setting->notify_children_old) {
+                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                continue;
+            }
+            if ($attendee->type == 'child_young' && $setting->notify_children_young) {
+                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                continue;
+            }
+            if ($attendee->type == 'baby' && $setting->notify_babies) {
+                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+            }
+        }
+
+        return redirect(route('events.show', $event));
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *
