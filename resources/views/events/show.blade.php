@@ -302,7 +302,7 @@
 
         <div class="mt-10">
             <h3 class="text-xl">Anmeldung hinzufügen</h3>
-            <p class="text-sm">Teilnehmer, welche über das admin interface angemeldet wurden, erhalten keine Bestätigungsmail.</p>
+            <p class="text-sm">Teilnehmer, welche über das admin interface angemeldet wurden, erhalten kein Bestätigungsmail.</p>
 
             @if ($errors->any())
                 <div
