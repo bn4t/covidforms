@@ -132,6 +132,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/promise" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/clue/stream-filter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/auth0-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/auth0/login" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

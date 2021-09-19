@@ -22,8 +22,8 @@ class EventNotificationSettingController extends Controller
         $notify_children_young = false;
         $notify_babies = false;
 
-        if (Auth::user()->eventNotificationSetting($event)->count() > 0) {
-            $setting = Auth::user()->eventNotificationSetting($event)->first();
+        if (EventNotificationSetting::all()->where('email', Auth::user()->email)->count() > 0) {
+            $setting = EventNotificationSetting::all()->where('email', Auth::user()->email)->first();
             $notify_adults = $setting->notify_adults;
             $notify_children_old = $setting->notify_children_old;
             $notify_children_young = $setting->notify_children_young;
@@ -48,9 +48,9 @@ class EventNotificationSettingController extends Controller
             'notify_babies' => 'boolean',
         ]);
 
-        if (Auth::user()->eventNotificationSetting($event)->count() > 0) {
-            $setting = Auth::user()->eventNotificationSetting($event)->first();
-            $setting->user_id = Auth::user()->id;
+        if (EventNotificationSetting::all()->where('email', Auth::user()->email)->count() > 0) {
+            $setting = EventNotificationSetting::all()->where('email', Auth::user()->email)->first();
+            $setting->email = Auth::user()->email;
             $setting->event_id = $event->id;
             $setting->notify_adults = $validated['notify_adults'] ?? false;;
             $setting->notify_children_old = $validated['notify_children_old'] ?? false;;
@@ -59,7 +59,7 @@ class EventNotificationSettingController extends Controller
             $setting->save();
         } else {
             $setting = new EventNotificationSetting;
-            $setting->user_id = Auth::user()->id;
+            $setting->email = Auth::user()->email;
             $setting->event_id = $event->id;
             $setting->notify_adults = $validated['notify_adults'] ?? false;
             $setting->notify_children_old = $validated['notify_children_old'] ?? false;;

@@ -8,7 +8,9 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^7.3|^8.0",
+        "auth0/login": "^6.4",
+        "auth0/auth0-php": "^7.9.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "graham-campbell/markdown": "^13.1",
@@ -48,7 +50,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [

@@ -235,7 +235,7 @@ class AttendeeController extends Controller
             }
 
             if (count($att_to_notify) > 0) {
-                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp($att_to_notify, $event));
+                Mail::to($setting->email)->queue(new AdminAttendeeSignedUp($att_to_notify, $event));
             }
         }
 
@@ -273,19 +273,19 @@ class AttendeeController extends Controller
         // send out relevant notification for subscribers
         foreach (EventNotificationSetting::where('event_id', $event->id)->get() as $setting) {
             if ($attendee->type == 'adult' && $setting->notify_adults) {
-                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                Mail::to($setting->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
                 continue;
             }
             if ($attendee->type == 'child_old' && $setting->notify_children_old) {
-                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                Mail::to($setting->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
                 continue;
             }
             if ($attendee->type == 'child_young' && $setting->notify_children_young) {
-                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                Mail::to($setting->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
                 continue;
             }
             if ($attendee->type == 'baby' && $setting->notify_babies) {
-                Mail::to(User::where('id', $setting->user_id)->first()->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
+                Mail::to($setting->email)->queue(new AdminAttendeeSignedUp([$attendee], $event));
             }
         }
 
