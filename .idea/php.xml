@@ -130,6 +130,7 @@
       <path value="$PROJECT_DIR$/vendor/auth0/auth0-php" />
       <path value="$PROJECT_DIR$/vendor/auth0/php-jwt" />
       <path value="$PROJECT_DIR$/vendor/auth0/login" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
