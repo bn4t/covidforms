@@ -270,14 +270,23 @@
                                             </td>
                                             <td class="px-6 py-4 break-words max-w-xs"
                                                 sorttable_customkey="{{$att->attended_event}}">
-                                                <form
-                                                    action="{{route('attendees.toggle_attendance', ['event' => $event, 'attendee' => $att])}}"
-                                                    method="post">
-                                                    @csrf
-                                                    <input type="checkbox"
-                                                           @if($att->attended_event) {{ 'checked' }} @endif onchange="this.form.submit()">
-                                                </form>
+
+                                                <input type="checkbox" id="attendee-{{$att->id}}-attendance"
+                                                @if($att->attended_event) {{ 'checked' }} @endif>
                                             </td>
+
+                                            <script>
+                                                let checkbox_{{$att->id}} = document.getElementById('attendee-{{$att->id}}-attendance');
+
+                                                checkbox_{{$att->id}}.addEventListener('change', (event) => {
+                                                    axios.post('{{route('attendees.toggle_attendance', ['event' => $event, 'attendee' => $att])}}')
+                                                        .catch(function (error) {
+                                                            console.log(error);
+                                                            return false;
+                                                        });
+                                                })
+                                            </script>
+
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <form method="post" action="{{ route('attendees.destroy', $att) }}"
                                                       onsubmit="return confirm('Anmeldung von {{ $att->first_name }} {{ $att->last_name }} löschen?');">
@@ -302,7 +311,8 @@
 
         <div class="mt-10">
             <h3 class="text-xl">Anmeldung hinzufügen</h3>
-            <p class="text-sm">Teilnehmer, welche über das admin interface angemeldet wurden, erhalten kein Bestätigungsmail.</p>
+            <p class="text-sm">Teilnehmer, welche über das admin interface angemeldet wurden, erhalten kein
+                Bestätigungsmail.</p>
 
             @if ($errors->any())
                 <div
@@ -349,9 +359,12 @@
                                value="{{ old('comment') }}">
                     </div>
                 </div>
-                <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg flex items-center my-2">Speichern</button>
+                <button type="submit"
+                        class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg flex items-center my-2">
+                    Speichern
+                </button>
             </form>
-         </div>
+        </div>
 
     </div>
 
