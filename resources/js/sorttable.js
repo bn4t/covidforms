@@ -15,6 +15,7 @@
   This basically means: do what you want with it.
 */
 
+/* jshint -W051, -W083, -W027 */
 
 var stIsIE = /*@cc_on!@*/false;
 
@@ -40,7 +41,7 @@ sorttable = {
     },
 
     makeSortable: function(table) {
-        if (table.getElementsByTagName('thead').length == 0) {
+        if (table.getElementsByTagName('thead').length === 0) {
             // table doesn't have a tHead. Since it should have, create one and
             // put the first table row in it.
             the = document.createElement('thead');
@@ -48,7 +49,7 @@ sorttable = {
             table.insertBefore(the,table.firstChild);
         }
         // Safari doesn't support table.tHead, sigh
-        if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+        if (table.tHead === null) table.tHead = table.getElementsByTagName('thead')[0];
 
         if (table.tHead.rows.length != 1) return; // can't cope with two header rows
 
@@ -63,20 +64,20 @@ sorttable = {
             }
         }
         if (sortbottomrows) {
-            if (table.tFoot == null) {
+            if (table.tFoot === null) {
                 // table doesn't have a tfoot. Create one.
                 tfo = document.createElement('tfoot');
                 table.appendChild(tfo);
             }
-            for (var i=0; i<sortbottomrows.length; i++) {
+            for (i=0; i<sortbottomrows.length; i++) {
                 tfo.appendChild(sortbottomrows[i]);
             }
-            sortbottomrows = null;
+            //delete sortbottomrows;
         }
 
         // work through each column and calculate its type
         headrow = table.tHead.rows[0].cells;
-        for (var i=0; i<headrow.length; i++) {
+        for (i=0; i<headrow.length; i++) {
             // manually override the type with a sorttable_type attribute
             if (!headrow[i].className.match(/\bsorttable_nosort\b/)) { // skip this col
                 mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
@@ -153,11 +154,11 @@ sorttable = {
                     row_array.sort(this.sorttable_sortfunction);
 
                     tb = this.sorttable_tbody;
-                    for (var j=0; j<row_array.length; j++) {
+                    for (j=0; j<row_array.length; j++) {
                         tb.appendChild(row_array[j][1]);
                     }
 
-                    row_array = null;
+                    //delete row_array;
                 });
             }
         }
@@ -168,18 +169,18 @@ sorttable = {
         sortfn = sorttable.sort_alpha;
         for (var i=0; i<table.tBodies[0].rows.length; i++) {
             text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
-            if (text != '') {
-                if (text.match(/^-?[Ł$¤]?[\d,.]+%?$/)) {
+            if (text !== '') {
+                if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
                     return sorttable.sort_numeric;
                 }
                 // check for a date: dd/mm/yyyy or dd/mm/yy
                 // can have / or . or - as separator
                 // can be mm/dd as well
-                possdate = text.match(sorttable.DATE_RE)
+                possdate = text.match(sorttable.DATE_RE);
                 if (possdate) {
                     // looks like a date
-                    first = parseInt(possdate[1]);
-                    second = parseInt(possdate[2]);
+                    first = parseInt(possdate[1], 10);
+                    second = parseInt(possdate[2], 10);
                     if (first > 12) {
                         // definitely dd/mm
                         return sorttable.sort_ddmm;
@@ -208,7 +209,7 @@ sorttable = {
         hasInputs = (typeof node.getElementsByTagName == 'function') &&
             node.getElementsByTagName('input').length;
 
-        if (node.getAttribute("sorttable_customkey") != null) {
+        if (node.nodeType == 1 && node.getAttribute("sorttable_customkey") !== null) {
             return node.getAttribute("sorttable_customkey");
         }
         else if (typeof node.textContent != 'undefined' && !hasInputs) {
@@ -226,6 +227,7 @@ sorttable = {
                     if (node.nodeName.toLowerCase() == 'input') {
                         return node.value.replace(/^\s+|\s+$/g, '');
                     }
+                    break;
                 case 4:
                     return node.nodeValue.replace(/^\s+|\s+$/g, '');
                     break;
@@ -249,10 +251,10 @@ sorttable = {
         for (var i=0; i<tbody.rows.length; i++) {
             newrows[newrows.length] = tbody.rows[i];
         }
-        for (var i=newrows.length-1; i>=0; i--) {
+        for (i=newrows.length-1; i>=0; i--) {
             tbody.appendChild(newrows[i]);
         }
-        newrows = null;
+        //delete newrows;
     },
 
     /* sort functions
@@ -266,9 +268,12 @@ sorttable = {
         return aa-bb;
     },
     sort_alpha: function(a,b) {
+        return a[0].localeCompare(b[0]);
+        /*
         if (a[0]==b[0]) return 0;
         if (a[0]<b[0]) return -1;
         return 1;
+        */
     },
     sort_ddmm: function(a,b) {
         mtch = a[0].match(sorttable.DATE_RE);
@@ -308,12 +313,13 @@ sorttable = {
         var b = 0;
         var t = list.length - 1;
         var swap = true;
+        var q;
 
         while(swap) {
             swap = false;
             for(var i = b; i < t; ++i) {
                 if ( comp_func(list[i], list[i+1]) > 0 ) {
-                    var q = list[i]; list[i] = list[i+1]; list[i+1] = q;
+                    q = list[i]; list[i] = list[i+1]; list[i+1] = q;
                     swap = true;
                 }
             } // for
@@ -321,9 +327,9 @@ sorttable = {
 
             if (!swap) break;
 
-            for(var i = t; i > b; --i) {
+            for(i = t; i > b; --i) {
                 if ( comp_func(list[i], list[i-1]) < 0 ) {
-                    var q = list[i]; list[i] = list[i-1]; list[i-1] = q;
+                    q = list[i]; list[i] = list[i-1]; list[i-1] = q;
                     swap = true;
                 }
             } // for
@@ -331,7 +337,7 @@ sorttable = {
 
         } // while(swap)
     }
-}
+};
 
 /* ******************************************************************
    Supporting functions: bundled here to avoid depending on a library
@@ -395,7 +401,7 @@ function dean_addEvent(element, type, handler) {
         // assign a global event handler to do all the work
         element["on" + type] = handleEvent;
     }
-};
+}
 // a counter used to create unique IDs
 dean_addEvent.guid = 1;
 
@@ -408,7 +414,7 @@ function removeEvent(element, type, handler) {
             delete element.events[type][handler.$$guid];
         }
     }
-};
+}
 
 function handleEvent(event) {
     var returnValue = true;
@@ -424,20 +430,20 @@ function handleEvent(event) {
         }
     }
     return returnValue;
-};
+}
 
 function fixEvent(event) {
     // add W3C standard event methods
     event.preventDefault = fixEvent.preventDefault;
     event.stopPropagation = fixEvent.stopPropagation;
     return event;
-};
+}
 fixEvent.preventDefault = function() {
     this.returnValue = false;
 };
 fixEvent.stopPropagation = function() {
     this.cancelBubble = true;
-}
+};
 
 // Dean's forEach: http://dean.edwards.name/base/forEach.js
 /*
