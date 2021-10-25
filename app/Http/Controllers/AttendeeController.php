@@ -34,7 +34,7 @@ class AttendeeController extends Controller
 
         // prevent signups after the event already happened
         // we need to sub a day from the current date to allow guests to still signup on the day of the event
-        if (Carbon::now()->subDay()->isAfter($event->date)) {
+        if (Carbon::now()->subDay()->isAfter(Carbon::parse($event->date))) {
             return view('events.expired');
         }
 
