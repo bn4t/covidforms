@@ -31,6 +31,7 @@ class AttendeeController extends Controller
      */
     public function create(Event $event)
     {
+        dd($event);
 
         // prevent signups after the event already happened
         // we need to sub a day from the current date to allow guests to still signup on the day of the event

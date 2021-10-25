@@ -24,7 +24,7 @@
 
             <div id="hide-on-success">
                 <div class="mb-16 mt-10 text-center markdown">
-                    {!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $event->description) !!}
+                    {!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($event->description) !!}
                 </div>
 
                 <h2 class="text-2xl text-center mb-5">Anmeldung</h2>
