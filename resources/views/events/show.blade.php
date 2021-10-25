@@ -5,7 +5,7 @@
                 {{ __('Event') }}
             </h2>
             <div class="flex flex-col items-start md:flex-row md:items-center">
-                <a href="{{ route('attendees.create', $event }}"
+                <a href="{{ route('attendees.create', $event) }}"
                    class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-1 px-3 rounded-lg mr-2 flex items-center my-1"
                    target="_blank">
                     <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
