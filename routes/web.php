@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['throttle:global'])->group(function () {
 
 
-    Route::get('/signup/{date}', [AttendeeController::class, 'create'])->name('attendees.create');
+    Route::get('/signup/{event}', [AttendeeController::class, 'create'])->name('attendees.create');
 
     Route::resource('events', EventController::class);
     Route::get('/events/{event}/remaining_seats', [EventController::class, 'remainingSeats'])->name('events.remaining_seats');
