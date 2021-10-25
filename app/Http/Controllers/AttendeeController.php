@@ -29,34 +29,21 @@ class AttendeeController extends Controller
      * @param $date
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create($date)
+    public function create(Event $event)
     {
-
-        // try parsing the date
-        $datetime = null;
-        try {
-            $datetime = Carbon::parse($date);
-        } catch (Exception $e) {
-            return view('events.404');
-        }
 
         // prevent signups after the event already happened
         // we need to sub a day from the current date to allow guests to still signup on the day of the event
-        if (Carbon::now()->subDay()->isAfter($datetime)) {
+        if (Carbon::now()->subDay()->isAfter($event->date)) {
             return view('events.expired');
         }
 
-        $ev = Event::where('date', $datetime->format('Y-m-d'))->first();
-        if ($ev == null) {
-            return view('events.404');
-        }
-
         return view('attendees.create', [
-                'event' => $ev,
-                'remaining_adults' => $ev->remainingAdultSeats(),
-                'remaining_children_old' => $ev->remainingChildrenOldSeats(),
-                'remaining_children_young' => $ev->remainingChildrenYoungSeats(),
-                'remaining_babies' => $ev->remainingBabySeats()
+                'event' => $event,
+                'remaining_adults' => $event->remainingAdultSeats(),
+                'remaining_children_old' => $event->remainingChildrenOldSeats(),
+                'remaining_children_young' => $event->remainingChildrenYoungSeats(),
+                'remaining_babies' => $event->remainingBabySeats()
             ]
         );
     }

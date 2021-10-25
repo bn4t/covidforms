@@ -74,7 +74,6 @@ class EventController extends Controller
      */
     public function show(Event $event, Request $request)
     {
-        $att = null;
 
         if ($request->input('filter_type') != "") {
             $att = $event->attendees()->where('type', '=',$request->input('filter_type'))->get()->sortBy('last_name');
