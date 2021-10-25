@@ -44,7 +44,7 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'date' => 'required|after_or_equal:today|date|unique:events,date',
+            'date' => 'required|after_or_equal:today|date',
             'description' => 'required|max:2048',
             'max_adults' => 'required|integer|min:0',
             'max_children_old' => 'required|integer|min:0',
@@ -132,8 +132,6 @@ class EventController extends Controller
             'max_children_young' => 'required|integer|min:0',
             'max_babies' => 'required|integer|min:0',
         ]);
-
-        // TODO: make sure events can't be specified on duplicate dates
 
         $event->title = $validated['title'];
         $event->date = $validated['date'];
