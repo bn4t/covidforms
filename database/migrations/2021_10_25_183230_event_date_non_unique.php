@@ -14,7 +14,7 @@ class EventDateNonUnique extends Migration
     public function up()
     {
         Schema::table('events', function(Blueprint $table) {
-            $table->date('date')->unique(false)->nullable()->change();
+            $table->dropUnique('date');
         });
     }
 
