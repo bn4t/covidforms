@@ -24,6 +24,6 @@
     },
     "dependencies": {
         "@sentry/browser": "^6.15.0",
-        "@sentry/tracing": "^6.15.0"
+        "@sentry/tracing": "^6.16.0"
     }
 }
