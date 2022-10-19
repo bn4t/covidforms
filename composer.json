@@ -18,7 +18,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "sentry/sentry-laravel": "^2.8"
+        "sentry/sentry-laravel": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
